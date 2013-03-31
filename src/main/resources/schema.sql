@@ -55,6 +55,32 @@ create table film_gatunek(
  	foreign key (gatunekFilmu) references gatunek(gatunekFilmu)
 );
 
+create table plyta (
+	idPlyty identity,
+    idFilmu integer not null,
+    foreign key (idFilmu) references film(idFilmu)
+
+);
+
+create table klient(
+	idKlienta identity,
+	nazwiskoKlienta varchar(30),
+	imieKlienta varchar(30),
+	plec varchar(1),
+	dataWprowadzenia Date
+	
+
+);
+
+create table wypozyczenie(
+	idWypozyczenia identity,
+	idPlyty integer not null,
+	idKlienta integer not null,
+	dataWypozyczenia Date,
+	dataZwrotu Date,
+	foreign key (idPlyty) references plyta(idPlyty),
+	foreign key (idKlienta) references klient(idKlienta)
+);
 
 
 

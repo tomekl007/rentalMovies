@@ -46,6 +46,13 @@ public class MainClass {
 		
 		System.out.println(daoImp.getFilmyDlaDanejCeny(10.00));
 
+		System.out.println(daoImp.getAllPlytyForFilm(1));
+		
+		System.out.println(daoImp.getKlientById(1));
+		
+		System.out.println(daoImp.getAllWypozyczeniaForKlient(1));
+		
+		
 	}
 
 }

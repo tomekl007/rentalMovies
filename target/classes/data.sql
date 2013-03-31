@@ -20,3 +20,17 @@ insert into film_gatunek(idFilmu,gatunekFilmu) values (1,'dramat');
 insert into film_gatunek(idFilmu,gatunekFilmu) values (1,'sensacyjny');
 
 insert into film_gatunek(idFilmu,gatunekFilmu) values (2,'fantasy');
+
+insert into plyta(idFilmu) values(1);
+insert into plyta(idFilmu) values(1);
+insert into plyta(idFilmu) values(2);
+
+insert into klient(nazwiskoKlienta) values('kowalski');
+insert into klient(nazwiskoKlienta) values('nowak');
+
+insert into wypozyczenie (idPlyty,idKlienta) values (1,1);
+insert into wypozyczenie (idPlyty,idKlienta) values (2,1);
+insert into wypozyczenie (idPlyty,idKlienta) values (3,2);
+
+
+

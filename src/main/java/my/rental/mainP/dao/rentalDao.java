@@ -8,6 +8,9 @@ import my.rental.mainP.domain.Aktor;
 import my.rental.mainP.domain.Cennik;
 import my.rental.mainP.domain.Film;
 import my.rental.mainP.domain.Gatunek;
+import my.rental.mainP.domain.Klient;
+import my.rental.mainP.domain.Plyta;
+import my.rental.mainP.domain.Wypozyczenie;
 
 
 
@@ -30,6 +33,12 @@ public interface rentalDao {
 	Cennik getCennikForFilm(long filmId);
 	
 	List<Film >getFilmyDlaDanejCeny(double cena);
+	
+	List<Plyta> getAllPlytyForFilm(long filmId);
+	
+	List<Wypozyczenie> getAllWypozyczeniaForKlient(long klientId);
+	
+	Klient getKlientById(long id);
 		
 	
 

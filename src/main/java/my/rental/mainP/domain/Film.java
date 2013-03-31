@@ -4,7 +4,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -41,6 +43,22 @@ public class Film {
 	}
 	
 	
+
+	  @OneToMany(mappedBy = "film", cascade=CascadeType.ALL, orphanRemoval=true,
+			  fetch = FetchType.EAGER)
+	  @LazyCollection(LazyCollectionOption.FALSE)
+	  List<Plyta> plyty;
+	
+	
+	public List<Plyta> getPlyty() {
+		return plyty;
+	}
+	public void setPlyty(List<Plyta> plyty) {
+		this.plyty = plyty;
+	}
+
+
+
 	@ManyToMany
 	@JoinTable(name = "film_gatunek",
 			joinColumns = { @JoinColumn(name="idFilmu",nullable = false, updatable = false) },

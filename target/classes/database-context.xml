@@ -52,6 +52,9 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
    	   <!--     <value>my.rental.mainP.domain.RodzajRoli</value>-->
    	        <value>my.rental.mainP.domain.Gatunek</value>
    	         <value>my.rental.mainP.domain.Cennik</value>
+   	         <value>my.rental.mainP.domain.Plyta</value>
+   	         <value>my.rental.mainP.domain.Wypozyczenie</value>
+   	         <value>my.rental.mainP.domain.Klient</value>
     
    </list>
   </property>

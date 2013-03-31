@@ -15,6 +15,9 @@ import my.rental.mainP.domain.Aktor_filmId;
 import my.rental.mainP.domain.Cennik;
 import my.rental.mainP.domain.Film;
 import my.rental.mainP.domain.Gatunek;
+import my.rental.mainP.domain.Klient;
+import my.rental.mainP.domain.Plyta;
+import my.rental.mainP.domain.Wypozyczenie;
 
 
 
@@ -106,6 +109,27 @@ public class HibernateRentalDaoImp implements rentalDao {
 		return films;
 		
 		
+	}
+
+	@Override
+	public List<Plyta> getAllPlytyForFilm(long filmId) {
+		Film film = getFilmById(filmId);
+		return film.getPlyty();
+		
+	}
+
+	@Override
+	public List<Wypozyczenie> getAllWypozyczeniaForKlient(long klientId) {
+		Klient klient = getKlientById(klientId);
+		return klient.getWypozyczenia();
+		
+	}
+
+	@Override
+	public Klient getKlientById(long id) {
+		Klient klient = template.get(Klient.class, id);
+		System.out.println("getKLientbyId found : "+ klient);
+		return klient;
 	}
 
 }
