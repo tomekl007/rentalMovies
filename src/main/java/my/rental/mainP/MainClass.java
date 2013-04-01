@@ -52,6 +52,7 @@ public class MainClass {
 		
 		System.out.println(daoImp.getAllWypozyczeniaForKlient(1));
 		
+		System.out.println(daoImp.getDoplataForWypozyczenie(1));
 		
 	}
 

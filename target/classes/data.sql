@@ -32,5 +32,8 @@ insert into wypozyczenie (idPlyty,idKlienta) values (1,1);
 insert into wypozyczenie (idPlyty,idKlienta) values (2,1);
 insert into wypozyczenie (idPlyty,idKlienta) values (3,2);
 
+insert into doplata (idWypozyczenia,doplata) values (1,5.00);
+
+ 
 
 

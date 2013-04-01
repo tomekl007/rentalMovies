@@ -13,6 +13,7 @@ import my.rental.mainP.domain.Aktor;
 import my.rental.mainP.domain.Aktor_film;
 import my.rental.mainP.domain.Aktor_filmId;
 import my.rental.mainP.domain.Cennik;
+import my.rental.mainP.domain.Doplata;
 import my.rental.mainP.domain.Film;
 import my.rental.mainP.domain.Gatunek;
 import my.rental.mainP.domain.Klient;
@@ -130,6 +131,20 @@ public class HibernateRentalDaoImp implements rentalDao {
 		Klient klient = template.get(Klient.class, id);
 		System.out.println("getKLientbyId found : "+ klient);
 		return klient;
+	}
+	
+	@Override
+	public Wypozyczenie getWypozyczenieById(long id) {
+		Wypozyczenie wypozyczenie = template.get(Wypozyczenie.class, id);
+		System.out.println("getWypozycznieebyId found : "+ wypozyczenie);
+		return wypozyczenie;
+	}
+
+	@Override
+	public Doplata getDoplataForWypozyczenie(long wypozyczenieId) {
+		Wypozyczenie wypozyczenie = getWypozyczenieById(wypozyczenieId);
+		return wypozyczenie.getDoplata();
+
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import my.rental.mainP.domain.Aktor;
 import my.rental.mainP.domain.Cennik;
+import my.rental.mainP.domain.Doplata;
 import my.rental.mainP.domain.Film;
 import my.rental.mainP.domain.Gatunek;
 import my.rental.mainP.domain.Klient;
@@ -39,7 +40,10 @@ public interface rentalDao {
 	List<Wypozyczenie> getAllWypozyczeniaForKlient(long klientId);
 	
 	Klient getKlientById(long id);
+	
+	Doplata getDoplataForWypozyczenie(long wypozyczenieId);
 		
+	Wypozyczenie getWypozyczenieById(long id);
 	
 
 

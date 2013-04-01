@@ -2,11 +2,15 @@ package my.rental.mainP.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Wypozyczenie {
@@ -16,7 +20,9 @@ public class Wypozyczenie {
 	Klient klient;
 	
 	@Id
-	private long idWypozyczenia ;
+	@GeneratedValue
+    @Column(name="idWypozyczenia")
+	private long idWypozyczenia;
 	
 	//Plyta plyta
 	private Date dataWypozyczenia;
@@ -27,6 +33,15 @@ public class Wypozyczenie {
 	@JoinColumn(name = "idPlyty")
 	private Plyta plyta;
 	
+	@OneToOne(mappedBy="wypozyczenie", cascade=CascadeType.ALL)
+	Doplata doplata;
+	
+	public Doplata getDoplata() {
+		return doplata;
+	}
+	public void setDoplata(Doplata doplata) {
+		this.doplata = doplata;
+	}
 	public Plyta getPlyta() {
 		return plyta;
 	}

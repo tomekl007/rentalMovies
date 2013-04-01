@@ -4,6 +4,7 @@ drop table if exists aktor_film;
 drop table if exists rodzajRoli;
 drop table if exists gatunek;
 drop table if exists film_gatunek;
+drop table if exists doplata;
 
 
 create table cennik (
@@ -83,6 +84,12 @@ create table wypozyczenie(
 );
 
 
+create table doplata(
+	idWypozyczenia integer not null,
+	doplata double,
+	foreign key (idWypozyczenia) references wypozyczenie(idWypozyczenia)
+
+);
 
 
 
