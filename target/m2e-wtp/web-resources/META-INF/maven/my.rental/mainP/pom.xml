@@ -159,6 +159,27 @@
 		</dependency>
 		
 		
+ <!--  security -->
+	  <dependency>
+		<groupId>org.springframework.security</groupId>
+		<artifactId>spring-security-core</artifactId>
+		<version>3.0.0.RELEASE</version>
+	</dependency>
+	
+	
+		    <dependency>
+	    	    <groupId>org.springframework.security</groupId>
+	   	     <artifactId>spring-security-taglibs</artifactId>
+       			 <version>3.0.0.RELEASE</version> 
+    	</dependency>
+	
+	 <dependency>
+		<groupId>org.springframework.security</groupId>
+		<artifactId>spring-security-config</artifactId>
+			<version>3.0.0.RELEASE</version>
+	</dependency>
+    
+		
 		
 		
 	

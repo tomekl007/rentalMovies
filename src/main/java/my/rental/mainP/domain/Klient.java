@@ -22,7 +22,28 @@ public class Klient {
 	private String imieKlienta;
 	private String plec;
 	private Date dataWprowadzenia ;
+	private String login;
+	private String password;
 	
+	//zakladam ze login to email
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
 	@OneToMany(mappedBy = "klient", cascade=CascadeType.ALL, orphanRemoval=true,
 			  fetch = FetchType.EAGER)
 	  @LazyCollection(LazyCollectionOption.FALSE)

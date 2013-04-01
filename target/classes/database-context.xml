@@ -28,7 +28,7 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
     <bean id="databaseFacade" class="my.rental.mainP.dao.HibernateRentalDaoImp" />
        
     
-	<tx:annotation-driven/>
+
 
 	<context:component-scan base-package="my.rental.mainP.domain" />
 
@@ -67,8 +67,29 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
  </bean>
  <!--<end id="bean_hibernateTemplate" />--> 
  
+ <!-- transactions -->
  
+ 	<tx:annotation-driven/>
+ 	
+ 	 <!-- declarative by aspect -->
+ <bean id="rentalService" class="my.rental.mainP.services.RentalServiceDeclImpl">
+  <property name="rentalDao" ref="databaseFacade"/>
+ </bean>
 
+<tx:advice id="txAdvice"> 
+    <tx:attributes> 
+      <tx:method name="add*" propagation="REQUIRED" /> 
+      <tx:method name="save*" propagation="REQUIRED" /> 
+      <tx:method name="*" propagation="SUPPORTS" 
+          read-only="true"/> 
+    </tx:attributes> 
+  </tx:advice> 
+  
+  <aop:config>
+    <aop:advisor 
+        pointcut="execution(* *..RentalService.*(..))"
+        advice-ref="txAdvice" />
+  </aop:config>
  
 
   

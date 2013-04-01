@@ -61,8 +61,8 @@ public class Aktor_film {
 	}
 	@Override
 	public String toString() {
-	
-		return aktor + " " + film;
+	     
+		return aktor + " -> " + rola;
 	}
 	
 

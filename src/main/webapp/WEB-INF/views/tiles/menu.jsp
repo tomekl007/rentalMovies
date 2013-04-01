@@ -4,8 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div>
-  <h2>Nasze filmy</h2>
-  <h3>zobacz co nowego mamy do zaoferowania!</h3>
+  <h2>A global community of friends and strangers spitting out their 
+  inner-most and personal thoughts on the web for everyone else to 
+  see.</h2>
+  <h3>Look at what these people are spitting right now...</h3>
 
   <table class="filmyHome">
     <c:forEach var="film" items="${filmy}"> <!--<co id="cp_foreach_spittles"/>-->
@@ -17,32 +19,15 @@
       </s:url>-->
 
       <tr>
-      	<td >
-         <p class="italic">
+      	<td class="opisFilmu">
+      
      <!--    <a href="${spitter_url}">              -->
           <c:out value="${film.tytulFilmu}" />
-          - <c:out value="${film.rokProdukcji}" /><br/>
-          <c:out value="${film.gatunki} "/>          
-      </p>
+          - <c:out value="${film.rokProdukcji}" /><br/>          
       </td>
       	
       	<td>
-      	 	<img src="${film.adresOkladka}" alt="filmPoster" height="84" width="84"> 
-      </td>
-      
-      <td>
-      Wystepuja :<br/> 
-      
-      <s:url value="/aktorzy/{aktorImie}" 
-                  var="aktor_url" >    <!--<co id="cp_spitter_url"/>-->
-        <s:param name="aktorImie" 
-                      value="${film.aktorzy}" />
-      </s:url>
-      
-       <a href="${aktor_url}">  
-     	<c:out value="${film.aktorzy} "/>
-      </a>
-       
+      	 	<img src="${film.adresOkladka}" alt="filmPoster" height="42" width="42"> 
       </td>
          </tr>
     </c:forEach>

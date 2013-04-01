@@ -23,7 +23,7 @@ import my.rental.mainP.domain.Wypozyczenie;
 
 
 @Component
-public class HibernateRentalDaoImp implements rentalDao {
+public class HibernateRentalDaoImp implements RentalDao {
 	
 	
 	@Autowired
@@ -145,6 +145,23 @@ public class HibernateRentalDaoImp implements rentalDao {
 		Wypozyczenie wypozyczenie = getWypozyczenieById(wypozyczenieId);
 		return wypozyczenie.getDoplata();
 
+	}
+
+	@Override
+	public List<Klient> getAllKlients() {
+		//String query="SELECT Klient FROM Klient";
+		List<Klient> k = template.loadAll(Klient.class);
+		System.out.println("find : "+  k);
+		return k ; 
+		
+	}
+
+	@Override
+	public List<Film> getAllFilmy() {
+		System.out.println("dao.getAllFilmy");
+		List<Film> filmy = template.loadAll(Film.class);
+		System.out.println("find : "+  filmy);
+		return filmy;
 	}
 
 }

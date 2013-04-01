@@ -25,8 +25,10 @@ insert into plyta(idFilmu) values(1);
 insert into plyta(idFilmu) values(1);
 insert into plyta(idFilmu) values(2);
 
-insert into klient(nazwiskoKlienta) values('kowalski');
-insert into klient(nazwiskoKlienta) values('nowak');
+
+insert into klient(nazwiskoKlienta,password,login) values('kowalski','1234','kow');
+insert into klient(nazwiskoKlienta,password,login) values('nowak','1234','now');
+
 
 insert into wypozyczenie (idPlyty,idKlienta) values (1,1);
 insert into wypozyczenie (idPlyty,idKlienta) values (2,1);

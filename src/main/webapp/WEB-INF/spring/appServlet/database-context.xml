@@ -28,7 +28,7 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
     <bean id="databaseFacade" class="my.rental.mainP.dao.HibernateRentalDaoImp" />
        
     
-	<tx:annotation-driven/>
+
 
 	<context:component-scan base-package="my.rental.mainP.domain" />
 
@@ -48,6 +48,14 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
      <list>
     	 <value>my.rental.mainP.domain.Film</value>
    	     <value>my.rental.mainP.domain.Aktor</value>
+   	     <value>my.rental.mainP.domain.Aktor_film</value>
+   	   <!--     <value>my.rental.mainP.domain.RodzajRoli</value>-->
+   	        <value>my.rental.mainP.domain.Gatunek</value>
+   	         <value>my.rental.mainP.domain.Cennik</value>
+   	         <value>my.rental.mainP.domain.Plyta</value>
+   	         <value>my.rental.mainP.domain.Wypozyczenie</value>
+   	         <value>my.rental.mainP.domain.Klient</value>
+   	         <value>my.rental.mainP.domain.Doplata</value>
     
    </list>
   </property>
@@ -59,9 +67,32 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
  </bean>
  <!--<end id="bean_hibernateTemplate" />--> 
  
+ <!-- transactions -->
  
+ 	<tx:annotation-driven/>
+ 	
+ 	 <!-- declarative by aspect -->
+ <bean id="rentalService" class="my.rental.mainP.services.RentalServiceDeclImpl">
+  <!-- <property name="rentalDao" ref="databaseFacade"/>-->
+ </bean>
 
- 
+
+<!-- 
+<tx:advice id="txAdvice"> 
+    <tx:attributes> 
+      <tx:method name="add*" propagation="REQUIRED" /> 
+      <tx:method name="save*" propagation="REQUIRED" /> 
+      <tx:method name="*" propagation="SUPPORTS" 
+          read-only="true"/> 
+    </tx:attributes> 
+  </tx:advice> 
+  
+  <aop:config>
+    <aop:advisor 
+        pointcut="execution(* *..RentalService.*(..))"
+        advice-ref="txAdvice" />
+  </aop:config>
+ -->
 
   
  

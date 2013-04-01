@@ -6,6 +6,8 @@ import my.rental.mainP.dao.HibernateRentalDaoImp;
 import my.rental.mainP.domain.Aktor;
 import my.rental.mainP.domain.Aktor_film;
 import my.rental.mainP.domain.Film;
+import my.rental.mainP.services.RentalService;
+import my.rental.mainP.services.RentalServiceDeclImpl;
 
 import org.springframework.context.support.GenericXmlApplicationContext;
 
@@ -53,6 +55,13 @@ public class MainClass {
 		System.out.println(daoImp.getAllWypozyczeniaForKlient(1));
 		
 		System.out.println(daoImp.getDoplataForWypozyczenie(1));
+		
+		RentalService rs = ctx.getBean("rentalService", RentalService .class);
+		
+		rs.getAllKlients();
+		
+		System.out.println(rs.getAllFilmy(2));
+		
 		
 	}
 

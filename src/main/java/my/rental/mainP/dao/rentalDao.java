@@ -16,7 +16,7 @@ import my.rental.mainP.domain.Wypozyczenie;
 
 
 
-public interface rentalDao {
+public interface RentalDao {
 	
 	Film getFilmById(long id);
 	
@@ -45,6 +45,9 @@ public interface rentalDao {
 		
 	Wypozyczenie getWypozyczenieById(long id);
 	
+	List<Klient> getAllKlients();
+	
+	List<Film> getAllFilmy();
 
 
 }

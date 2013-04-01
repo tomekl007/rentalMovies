@@ -23,7 +23,17 @@ public class Film {
 	@Id
 	private Long idFilmu;
 	private String tytulFilmu;
+	private String adresOkladka;
 	
+	public String getAdresOkladka() {
+		return adresOkladka;
+	}
+	public void setAdresOkladka(String adresOkladka) {
+		this.adresOkladka = adresOkladka;
+	}
+
+
+
 	@ManyToOne
 	@JoinColumn(name = "rodzajFilmu")
 	private Cennik rodzajFilmu;

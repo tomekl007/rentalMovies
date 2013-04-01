@@ -68,7 +68,9 @@ create table klient(
 	nazwiskoKlienta varchar(30),
 	imieKlienta varchar(30),
 	plec varchar(1),
-	dataWprowadzenia Date
+	dataWprowadzenia Date,
+	password varchar(30) not null,
+	login varchar(30) not null
 	
 
 );
