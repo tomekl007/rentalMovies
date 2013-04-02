@@ -45,6 +45,33 @@
      
    </definition>
    
+     <definition name="klient/edit" extends="template">
+     <put-attribute name="content" value="/WEB-INF/views/editKlient.jsp" />
+     
+   </definition>
+   
+      
+   
+     <definition name="klient/viewNewKlient" extends="template">
+     <put-attribute name="content" value="/WEB-INF/views/viewNewKlient.jsp" />
+     
+   </definition>
+   
+   
+   <definition name="admin/listaWypozyczen" extends="template">
+     <put-attribute name="content" value="/WEB-INF/views/listaWypozyczenAll.jsp" />
+     
+   </definition>
+   
+     <definition name="wypozyczenie/naliczonaKwota" extends="template">
+     <put-attribute name="content" value="/WEB-INF/views/podsumowanieWypozyczenia.jsp" />
+     
+   </definition>
+   
+
+   
+   
+   
    
     <definition name="login" extends="template">
      <put-attribute name="content" value="/WEB-INF/views/login.jsp" />

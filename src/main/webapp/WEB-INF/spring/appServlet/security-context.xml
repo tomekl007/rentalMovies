@@ -17,8 +17,8 @@
 		  logout-url="/static/j_spring_security_logout"/>
 		 
 		<intercept-url pattern="/home" access="hasRole('ROLE_USER')"/>
-		<!-- <intercept-url pattern="/admin/**" 
-        access="isAuthenticated() and principal.username=='habuma'"/>-->
+		 <intercept-url pattern="/admin/**" 
+        access="isAuthenticated() and principal.username=='admin'"/>
         <intercept-url pattern="/login" requires-channel="https"/>
 	    <!-- <intercept-url pattern="/spitter/form" requires-channel="https"/>-->
 	    

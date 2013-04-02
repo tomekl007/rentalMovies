@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 
 import my.rental.mainP.ShoppingCart;
 import my.rental.mainP.Utils;
@@ -20,6 +21,9 @@ import my.rental.mainP.services.RentalService;
 
 
 
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.Authentication;
@@ -27,10 +31,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
@@ -205,6 +212,43 @@ public class KlienciController {
   
   	
   }
+  
+  @RequestMapping( method=RequestMethod.GET, params="new")
+  public String createKlientForm(Model model) {
+	  //model.put("spitter", new Spitter());
+	  Klient klient = new Klient(); 
+	  
+	model.addAttribute("gatunki", rentalService.getAllGatunki());
+    model.addAttribute("klient",klient);
+    return "klient/edit";
+  }
+  
+  @RequestMapping(method=RequestMethod.POST)
+  public String addKlientFromForm(@Valid Klient klient, 
+      BindingResult bindingResult, Model model) {
+    
+	  System.out.println("get klient" + klient);
+    if(bindingResult.hasErrors()) {
+    	model.addAttribute("gatunki", rentalService.getAllGatunki());
+      return "klient/edit";
+    } 
+    
+    rentalService.saveKlient(klient);
+    
+    
+
+    return "redirect:/klienci/" + klient.getLogin();
+  }  
+  
+  
+  @RequestMapping(value = "/{loginKlient}", method = RequestMethod.GET)
+  String getNewKlientView(@PathVariable String loginKlient,Model model) {
+	  Klient klient = rentalService.findKlientByName(loginKlient);
+	  
+	  model.addAttribute("klient",klient);
+	  
+	  	return "klient/viewNewKlient";
+}
  
   
   }

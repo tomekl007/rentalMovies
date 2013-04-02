@@ -18,6 +18,7 @@ insert into aktor (imieAktora, nazwiskoAktora) values ('ian','mckallen');
 insert into aktor (imieAktora, nazwiskoAktora) values ('Tom','Hanks');
 insert into aktor (imieAktora, nazwiskoAktora) values ('BEn','Afflec');
 insert into aktor (imieAktora, nazwiskoAktora) values ('Matt','Damon');
+insert into aktor (imieAktora, nazwiskoAktora) values ('Gary','Oldman');
 
 
 
@@ -26,7 +27,7 @@ insert into aktor_film (idFilmu, idAktora,rola) values (3,3,'gandalf');
 insert into aktor_film (idFilmu, idAktora,rola) values (4,4,'wedrowiec');
 insert into aktor_film (idFilmu, idAktora,rola) values (6,2,'clyde');
 insert into aktor_film (idFilmu, idAktora,rola) values (2,5,'agent CIA');
-insert into aktor_film (idFilmu, idAktora,rola) values (99,4,'szef brygady');
+insert into aktor_film (idFilmu, idAktora,rola) values (1,7,'jim gordon');
 insert into aktor_film (idFilmu, idAktora,rola) values (99,6,'szeregowiec Ryan');
 
 insert into gatunek (gatunekFilmu) values ('dramat');
@@ -62,10 +63,11 @@ insert into plyta(idFilmu) values(6);
 
 insert into klient(nazwiskoKlienta,password,login) values('kowalski','1234','kow');
 insert into klient(nazwiskoKlienta,password,login) values('nowak','1234','now');
+insert into klient(nazwiskoKlienta,password,login) values('admin','admin','admin');
 
 insert into wypozyczenie (idPlyty,idKlienta,dataWypozyczenia,dataZwrotu) values (1,1,'2013-01-03','2013-01-12');
-insert into wypozyczenie (idPlyty,idKlienta) values (2,1);
-insert into wypozyczenie (idPlyty,idKlienta) values (3,2);
+insert into wypozyczenie (idPlyty,idKlienta,dataWypozyczenia) values (2,1,'2013-01-03');
+insert into wypozyczenie (idPlyty,idKlienta,dataWypozyczenia) values (3,2,'2013-03-29');
 
 insert into doplata (idWypozyczenia,doplata) values (1,5.00);
 

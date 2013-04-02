@@ -13,7 +13,7 @@ public class AktorzyController {
 	
 	
 	 @RequestMapping(value="/{imieAktora}", method=RequestMethod.GET)
-	  public String getSpittle(@PathVariable("imieAktora") String imieAktora,
+	  public String getAktor(@PathVariable("imieAktora") String imieAktora,
 	          Model model) {
 		 
 		 System.out.println("dostalem: " + imieAktora);

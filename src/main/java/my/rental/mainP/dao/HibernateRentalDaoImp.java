@@ -3,6 +3,7 @@ package my.rental.mainP.dao;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -216,6 +217,28 @@ public class HibernateRentalDaoImp implements RentalDao {
 		List<Klient> k = template.find(query,name);
 		System.out.println("find klient  : "+ k);
 		return k.get(0);
+	}
+
+	@Override
+	public void addKlient(Klient klient) {
+		template.saveOrUpdate(klient);
+		
+	}
+
+	@Override
+	public List<Wypozyczenie> getAllWypozyczeniaBezZwrotu() {
+		String query = "FROM Wypozyczenie w where w.dataZwrotu is null";
+		List<Wypozyczenie> wyp = template.find(query);
+		System.out.println("find wyp bez daty zwrotu :" + wyp);
+		return wyp;
+		
+		
+	}
+
+	@Override
+	public void setDataZwrotuForWypozyczenie(Wypozyczenie wypozyczenie) {
+		template.saveOrUpdate(wypozyczenie);
+		
 	}
 
 }

@@ -77,7 +77,7 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
  </bean>
 
 
-<!-- 
+ 
 <tx:advice id="txAdvice"> 
     <tx:attributes> 
       <tx:method name="add*" propagation="REQUIRED" /> 
@@ -92,7 +92,7 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
         pointcut="execution(* *..RentalService.*(..))"
         advice-ref="txAdvice" />
   </aop:config>
- -->
+ 
 
   
  

@@ -2,6 +2,7 @@ package my.rental.mainP.dao;
 
 
 
+import java.util.Date;
 import java.util.List;
 
 import my.rental.mainP.domain.Aktor;
@@ -60,6 +61,12 @@ public interface RentalDao {
 	void saveWypozyczenie(Wypozyczenie wypozyczenie);
 
 	Klient getKlientByName(String name);
+
+	void addKlient(Klient klient);
+
+	List<Wypozyczenie> getAllWypozyczeniaBezZwrotu();
+
+	void setDataZwrotuForWypozyczenie(Wypozyczenie wypozyczenie);
 
 
 }

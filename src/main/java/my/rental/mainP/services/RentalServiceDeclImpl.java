@@ -1,6 +1,7 @@
 package my.rental.mainP.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,7 +22,7 @@ import my.rental.mainP.domain.Wypozyczenie;
 
 
 @Component("rentalService")
-//@Transactional(propagation=Propagation.REQUIRED)
+@Transactional(propagation=Propagation.REQUIRED)
 public class RentalServiceDeclImpl implements RentalService {
 
 	RentalDao rentalDao;
@@ -126,6 +127,33 @@ public class RentalServiceDeclImpl implements RentalService {
 	public Klient findKlientByName(String name) {
 		
 		return rentalDao.getKlientByName(name);
+	}
+
+
+	@Override
+	public void saveKlient(Klient klient) {
+		rentalDao.addKlient(klient);
+		
+	}
+
+
+	@Override
+	public List<Wypozyczenie> getAllWypozyczeniaBezZwrotu() {
+		return rentalDao.getAllWypozyczeniaBezZwrotu();
+		
+	}
+
+
+	@Override
+	public Wypozyczenie getWypozyczenieById(long idWypozyczenia) {
+		return rentalDao.getWypozyczenieById(idWypozyczenia);
+	}
+
+
+	@Override
+	public void setDataZwrotuForWypozyczenie(Wypozyczenie wypozyczenie) {
+		rentalDao.setDataZwrotuForWypozyczenie(wypozyczenie);
+		
 	}
 
 }

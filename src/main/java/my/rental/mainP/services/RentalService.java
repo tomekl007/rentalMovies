@@ -1,5 +1,6 @@
 package my.rental.mainP.services;
 
+import java.util.Date;
 import java.util.List;
 
 import my.rental.mainP.domain.Film;
@@ -25,5 +26,13 @@ public interface RentalService {
 	void addWypozyczenie(Wypozyczenie wypozyczenie);
 
 	Klient findKlientByName(String name);
+
+	void saveKlient(Klient klient);
+
+	List<Wypozyczenie> getAllWypozyczeniaBezZwrotu();
+
+	Wypozyczenie getWypozyczenieById(long idWypozyczenia);
+
+	void setDataZwrotuForWypozyczenie(Wypozyczenie wypozyczenie);
 
 }

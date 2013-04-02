@@ -32,7 +32,7 @@
 		<div class="notify">
 		  Chcesz zalozyc konto?   
 		  <br/>
-		  <a class="join" href="<s:url value="/spitters?new"/>">Dolacz za darmo</a>
+		  <a class="join" href="<s:url value="/klienci?new"/>">Dolacz za darmo</a>
 		  <br/>
 		  To latwe i szybkie!
 		</div>
@@ -48,8 +48,8 @@
                 var="logout_url" /> 
 	  <a href="${logout_url}">Wyloguj</a>
 	  <sec:authorize url="/admin">
-      <s:url value="/klienci/konto" var="konto_url" />
-	    <br/><a href="${konto_url}">Moje konto</a>
+      <s:url value="/admin/listaAllWyp" var="konto_url" />
+	    <br/><a href="${konto_url}">Admin</a>
 	  </sec:authorize>
 	</sec:authorize>
 </div>
