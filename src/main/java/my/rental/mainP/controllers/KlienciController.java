@@ -1,5 +1,9 @@
 package my.rental.mainP.controllers;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -7,13 +11,17 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import my.rental.mainP.ShoppingCart;
+import my.rental.mainP.Utils;
 import my.rental.mainP.domain.Film;
 import my.rental.mainP.domain.Klient;
+import my.rental.mainP.domain.Plyta;
+import my.rental.mainP.domain.Wypozyczenie;
 import my.rental.mainP.services.RentalService;
 
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -103,9 +111,100 @@ public class KlienciController {
   }
   
   
+  @RequestMapping(value="/usunWszystkie", 
+          method=RequestMethod.GET)
+  	public String usunFilm(Model model) {
+	  
+	  cart.deleteAllFilmFromShoppingCart();
+	  model.addAttribute("filmy",rentalService.getAllFilmy(20));
+	  model.addAttribute("gatunki", rentalService.getAllGatunki());
+	  
+	  	return "home";
+  }
+  
+  
+  @RequestMapping(value="/zakonczTransakcje", 
+  method=RequestMethod.GET)
+  		public String sprawdzDostepnoscPlyt(Model model) {
+
+	  List<Plyta> plyty = rentalService.getDostepnePlytyForFilmy(cart.getZamowioneFilmy());
+	  System.out.println("controller get plyty : " + plyty);
+	  cart.setZamowionePlyty(new HashSet(plyty));
+	  
+	  List<Film> filmyDostepne = getDostepne(plyty);
+	  System.out.println("dostepne filmy :" + filmyDostepne);
+	  List<Film> filmyNIedostepne = getNiedostepne(cart.getZamowioneFilmy(),filmyDostepne);
+	  System.out.println("niedostepne filmy :" + filmyNIedostepne);
+	 
+	  model.addAttribute("dostepne",filmyDostepne);
+	  model.addAttribute("niedostepne",filmyNIedostepne);
+	  model.addAttribute("gatunki", rentalService.getAllGatunki());
+
+	  	return "klient/zamowieniePodsumowanie";
+}
+  
+  private List<Film> getDostepne(List<Plyta> plyty){
+	  
+	  List<Film> dostepne = new LinkedList<Film>();
+	  	for(Plyta p : plyty){
+	  		for(Film f:cart.getZamowioneFilmy())
+	  			if(f.equals(p.getFilm()))
+	  				dostepne.add(f);
+	  				
+	  	}
+	  	return dostepne;
+	  	
+  }
+  
+  private List<Film>  getNiedostepne(List<Film> wanted, List<Film> get){
+	  
+	  Collection<Film> similar = new HashSet<Film>( wanted );
+	  Collection<Film> different = new HashSet<Film>();
+	  
+	  different.addAll( wanted );
+      different.addAll( get );
+
+      similar.retainAll( get );
+      different.removeAll( similar );
+      return new ArrayList(different);
+	  
+	  
+  }
+  
+  
+  @RequestMapping(value="/zakonczenieTransakcji", 
+          method=RequestMethod.GET)
+  	public String zakonczTransakcje(Model model) {
+	  
+	   zapiszZamowienieWBazieDanych();
+	  
+	  	return "klient/dziekujemyZaZamowienie";
+  }
+
+
+  @Async
+  	private void zapiszZamowienieWBazieDanych() {
+	  
+	  
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String name = auth.getName(); //get logged in username
+		
+		System.out.println("user logged in : " + name);
+		Klient klient = rentalService.findKlientByName(name);
+	  	
+	  for(Plyta p : cart.getZamowionePlyty() ){
+		  Wypozyczenie wypozyczenie = new Wypozyczenie();
+		  wypozyczenie.setPlyta(p);
+		  wypozyczenie.setKlient(klient);
+		  wypozyczenie.setDataWypozyczenia(new Date());
+		  
+		  rentalService.addWypozyczenie(wypozyczenie);
+  		}
+	  
+	  cart.cleanShoppingCart();
   
   	
-
+  }
  
   
   }

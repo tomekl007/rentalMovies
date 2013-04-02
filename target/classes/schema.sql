@@ -26,6 +26,7 @@ create table film (
   rokProdukcji integer not null,
   rodzajFilmu varchar(30),
   adresOkladka varchar(300),
+  linkDoFilmweb varchar(300),
   foreign key (rodzajFilmu) references cennik(rodzajFilmu)
   
  );

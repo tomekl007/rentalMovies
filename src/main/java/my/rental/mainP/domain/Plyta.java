@@ -63,6 +63,20 @@ public class Plyta {
 	  return " film : " + film + " na plycie : " + idPlyty; 
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Plyta))
+			return false;
+		Plyta otherPlyta = (Plyta)obj;
+		return this.film.equals(otherPlyta.getFilm());
+	}
+	
+	@Override
+	public int hashCode() {
+		
+		return (int) ((int) this.getFilm().getTytulFilmu().length()*this.getFilm().getIdFilmu()+this.getFilm().getIdFilmu());
+	}
+	
 	
 
 }

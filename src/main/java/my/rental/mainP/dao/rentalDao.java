@@ -53,5 +53,13 @@ public interface RentalDao {
 
 	List<Film> getAllFilmyForGatunek(String nazwaGatunku);
 
+	List<Plyta> getAllPlyty();
+
+	List<Wypozyczenie> getAllWypozyczeniaForPlyta(long idPlyty);
+
+	void saveWypozyczenie(Wypozyczenie wypozyczenie);
+
+	Klient getKlientByName(String name);
+
 
 }

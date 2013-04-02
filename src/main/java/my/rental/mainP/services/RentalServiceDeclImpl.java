@@ -1,6 +1,9 @@
 package my.rental.mainP.services;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -13,6 +16,8 @@ import my.rental.mainP.dao.RentalDao;
 import my.rental.mainP.domain.Film;
 import my.rental.mainP.domain.Gatunek;
 import my.rental.mainP.domain.Klient;
+import my.rental.mainP.domain.Plyta;
+import my.rental.mainP.domain.Wypozyczenie;
 
 
 @Component("rentalService")
@@ -61,6 +66,66 @@ public class RentalServiceDeclImpl implements RentalService {
 	public Film findFilmById(long idFilmu) {
 		return rentalDao.getFilmById(idFilmu);
 		
+	}
+
+
+	@Override
+	public List<Plyta> getDostepnePlytyForFilmy(List<Film> zamowioneFilmy) {
+		List<Plyta> plyty =  rentalDao.getAllPlyty();
+		System.out.println("getDostepnePlytyForFilm");
+		Set<Plyta> doWypozyczenia = new HashSet<Plyta>();
+		
+		for(Plyta p : plyty){
+			for(Film f : zamowioneFilmy){
+				if(p.getFilm().equals(f)){
+				  System.out.println("znalazlem film na cd");
+				     List<Wypozyczenie> wypozyczenia = rentalDao.getAllWypozyczeniaForPlyta(p.getIdPlyty());
+				     if(wypozyczenia.isEmpty()){
+				    	doWypozyczenia.add(p); 
+				     }else{
+				     System.out.println("wypozyczniea dla plyty" + wypozyczenia);
+				     	if(spradzCzyPlytaZostalaOddana(wypozyczenia)){
+				     			doWypozyczenia.add(p);
+				     	}
+				     }
+				     		
+				    }
+				}
+				   
+			}
+			
+			
+		
+		
+		return new ArrayList(doWypozyczenia);
+	}
+	
+	private boolean spradzCzyPlytaZostalaOddana(List<Wypozyczenie> wypozyczenia){
+		boolean result=true;
+		
+		for(Wypozyczenie wyp : wypozyczenia){
+     		if(wyp.getDataZwrotu()==null){
+     			System.out.println("plyta nie jest dostepna");
+     			return false;
+     			
+     		}
+		}
+		return result;
+	}
+
+
+	@Override
+	public void addWypozyczenie(Wypozyczenie wypozyczenie) {
+		System.out.println("rentalService.addWypozyczenie : " + wypozyczenie);
+		rentalDao.saveWypozyczenie(wypozyczenie);
+		
+	}
+
+
+	@Override
+	public Klient findKlientByName(String name) {
+		
+		return rentalDao.getKlientByName(name);
 	}
 
 }

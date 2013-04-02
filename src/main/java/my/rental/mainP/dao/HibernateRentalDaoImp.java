@@ -183,4 +183,39 @@ public class HibernateRentalDaoImp implements RentalDao {
 
 	}
 
+	@Override
+	public List<Plyta> getAllPlyty() {
+		return template.loadAll(Plyta.class);
+		
+	}
+
+	@Override
+	public List<Wypozyczenie> getAllWypozyczeniaForPlyta(long idPlyty) {
+		
+		//String query="FROM Plyta p inner join fetch p.wypozyczenia WHERE p.film.idFilmu=? ";
+		String query="FROM Wypozyczenie w inner join fetch w.plyta as plyta WHERE " +
+				"plyta.idPlyty=? ";
+		
+		List<Wypozyczenie> wyp = template.find(query,idPlyty);
+		System.out.println("find wypozyczniea for plyta : "+ wyp);
+		return wyp;
+		
+	}
+
+	@Override
+	public void saveWypozyczenie(Wypozyczenie wypozyczenie) {
+		template.saveOrUpdate(wypozyczenie);
+		
+	}
+
+	@Override
+	public Klient getKlientByName(String name) {
+		String query="FROM Klient k WHERE " +
+				"k.login=? ";
+		
+		List<Klient> k = template.find(query,name);
+		System.out.println("find klient  : "+ k);
+		return k.get(0);
+	}
+
 }

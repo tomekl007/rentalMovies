@@ -4,8 +4,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 import my.rental.mainP.domain.Film;
+import my.rental.mainP.domain.Plyta;
 
 public class Utils {
+	
+	
 	
 	 public static List<Film> filtrFilmy(List<Film> allFilmy, String filtr) {
 			
@@ -17,5 +20,7 @@ public class Utils {
 		  //return wynik;
 		  return allFilmy;
 	}
+
+	
 
 }

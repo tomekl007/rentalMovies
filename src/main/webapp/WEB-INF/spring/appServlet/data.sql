@@ -50,11 +50,20 @@ insert into film_gatunek(idFilmu,gatunekFilmu) values (6,'akcja');
 insert into plyta(idFilmu) values(1);
 insert into plyta(idFilmu) values(1);
 insert into plyta(idFilmu) values(2);
+insert into plyta(idFilmu) values(3);
+insert into plyta(idFilmu) values(4);
+insert into plyta(idFilmu) values(5);
+insert into plyta(idFilmu) values(6);
+insert into plyta(idFilmu) values(4);
+insert into plyta(idFilmu) values(5);
+insert into plyta(idFilmu) values(6);
+
+
 
 insert into klient(nazwiskoKlienta,password,login) values('kowalski','1234','kow');
 insert into klient(nazwiskoKlienta,password,login) values('nowak','1234','now');
 
-insert into wypozyczenie (idPlyty,idKlienta) values (1,1);
+insert into wypozyczenie (idPlyty,idKlienta,dataWypozyczenia,dataZwrotu) values (1,1,'2013-01-03','2013-01-12');
 insert into wypozyczenie (idPlyty,idKlienta) values (2,1);
 insert into wypozyczenie (idPlyty,idKlienta) values (3,2);
 

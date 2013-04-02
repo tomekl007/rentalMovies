@@ -2,13 +2,13 @@ insert into cennik(rodzajFilmu, oplataZa1Dzien) values ('normalny',10.00);
 insert into cennik(rodzajFilmu, oplataZa1Dzien) values ('hit',15.00);
 insert into cennik(rodzajFilmu, oplataZa1Dzien) values ('nowosc',12.00);
 
-insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka) values ('batman', 2009, 'normalny','http://images.wikia.com/batman/images/b/b0/The-dark-knight-got-milk.jpg');
-insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka) values ('matrix', 2010, 'normalny','http://1.fwcdn.pl/po/06/28/628/7495038.3.jpg?l=1350559192000');
-insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka) values ('hoobbit', 2013, 'hit','http://3.bp.blogspot.com/-flkCoivN-xM/UOw-rCCRo7I/AAAAAAAACkw/rRnfnKHcpaw/s1600/The-Hobbit-1024x1024.jpg');
-insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka) values ('atlas chmur', 2013, 'nowosc','http://ecsmedia.pl/c/cloud-atlas-atlas-chmur-b-iext12978565.jpg');
-insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka) values ('djanngo', 2013, 'nowosc','http://4.bp.blogspot.com/-lr_tfZRP8qY/UPvNAZnYsKI/AAAAAAAAGCs/T51lLmuzGUc/s1600/django-unchained-poster3.jpg');
-insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka) values ('operacja argo', 2013, 'nowosc','http://1.fwcdn.pl/po/41/65/614165/7496968.3.jpg?l=1351310746000');
-insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka,idFilmu) values ('szeregowiec ryan', 2000, 'normalny','/resources/images/ryan.jpg',99);
+insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka,linkDoFilmweb) values ('batman', 2009, 'normalny','http://images.wikia.com/batman/images/b/b0/The-dark-knight-got-milk.jpg','http://www.filmweb.pl/film/Mroczny+Rycerz+powstaje-2012-506756');
+insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka,linkDoFilmweb) values ('matrix', 2010, 'normalny','http://1.fwcdn.pl/po/06/28/628/7495038.3.jpg?l=1350559192000','http://www.filmweb.pl/Matrix');
+insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka,linkDoFilmweb) values ('hoobbit', 2013, 'hit','http://3.bp.blogspot.com/-flkCoivN-xM/UOw-rCCRo7I/AAAAAAAACkw/rRnfnKHcpaw/s1600/The-Hobbit-1024x1024.jpg','http://www.filmweb.pl/film/Hobbit%3A+Niezwyk%C5%82a+podr%C3%B3%C5%BC-2012-343217');
+insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka,linkDoFilmweb) values ('atlas chmur', 2013, 'nowosc','http://ecsmedia.pl/c/cloud-atlas-atlas-chmur-b-iext12978565.jpg','http://www.filmweb.pl/film/Atlas+chmur-2012-580801');
+insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka,linkDoFilmweb) values ('djanngo', 2013, 'nowosc','http://4.bp.blogspot.com/-lr_tfZRP8qY/UPvNAZnYsKI/AAAAAAAAGCs/T51lLmuzGUc/s1600/django-unchained-poster3.jpg','http://www.filmweb.pl/film/Django-2012-620541');
+insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka,linkDoFilmweb) values ('operacja argo', 2013, 'nowosc','http://1.fwcdn.pl/po/41/65/614165/7496968.3.jpg?l=1351310746000','http://www.filmweb.pl/film/Operacja+Argo-2012-614165');
+insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka,idFilmu,linkDoFilmweb) values ('szeregowiec ryan', 2000, 'normalny','/resources/images/ryan.jpg',99,'http://www.filmweb.pl/Szeregowiec.Ryan');
 
 
 
@@ -50,6 +50,15 @@ insert into film_gatunek(idFilmu,gatunekFilmu) values (6,'akcja');
 insert into plyta(idFilmu) values(1);
 insert into plyta(idFilmu) values(1);
 insert into plyta(idFilmu) values(2);
+insert into plyta(idFilmu) values(3);
+insert into plyta(idFilmu) values(4);
+insert into plyta(idFilmu) values(5);
+insert into plyta(idFilmu) values(6);
+insert into plyta(idFilmu) values(4);
+insert into plyta(idFilmu) values(5);
+insert into plyta(idFilmu) values(6);
+
+
 
 insert into klient(nazwiskoKlienta,password,login) values('kowalski','1234','kow');
 insert into klient(nazwiskoKlienta,password,login) values('nowak','1234','now');

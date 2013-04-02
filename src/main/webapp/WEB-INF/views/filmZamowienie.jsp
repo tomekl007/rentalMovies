@@ -6,6 +6,19 @@
 
 
 
+  
+    
+    
+<script type="text/javascript">
+function onClickDelete()
+{
+x=confirm("Czy napewno chcesz usunac wszystkie filmy?");
+if(x)
+	location.href="/mainP/klienci/usunWszystkie";
+
+}
+</script>
+
 <div>
 
   <h3>Twoje zamowienie:</h3>
@@ -56,6 +69,10 @@
                       value="${film.idFilmu}" />
       </s:url>
       
+       <s:url value="/klienci/usunWszystkie" 
+                  var="film_usunWszystkie_url" >    <!--<co id="cp_spitter_url"/>-->
+      </s:url>
+      
       <td>
       	<input type="button" value="usun" name="usunZKarty"
            onClick="location.href='${film_usun_url}'" /> 
@@ -70,6 +87,8 @@
   <input type="button" value="kontynuuj wypozyczanie" name="kontynuujWypozyczanie"
            onClick="location.href='/mainP'" />    
   <input type="button" value="zakoncz" name="zakoncz"
-       onClick="location.href='/mainP'" /> 
+       onClick="location.href='/mainP/klienci/zakonczTransakcje'" /> 
+  <input type="button" value="usunWszystkie" name="deleteAll"
+       onClick="onClickDelete()" />
   
 </div>

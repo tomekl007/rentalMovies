@@ -5,6 +5,8 @@ import java.util.List;
 import my.rental.mainP.domain.Film;
 import my.rental.mainP.domain.Gatunek;
 import my.rental.mainP.domain.Klient;
+import my.rental.mainP.domain.Plyta;
+import my.rental.mainP.domain.Wypozyczenie;
 
 public interface RentalService {
 	
@@ -17,5 +19,11 @@ public interface RentalService {
 	List<Film> getALlFilmyForGatunek(String nazwaGatunku);
 
 	Film findFilmById(long idFilmu);
+
+	List<Plyta> getDostepnePlytyForFilmy(List<Film> zamowioneFilmy);
+	
+	void addWypozyczenie(Wypozyczenie wypozyczenie);
+
+	Klient findKlientByName(String name);
 
 }

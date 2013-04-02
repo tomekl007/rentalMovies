@@ -64,6 +64,8 @@ public class MainClass {
 		
 		System.out.println(rs.getALlFilmyForGatunek("akcja"));
 		
+		System.out.println(daoImp.getAllWypozyczeniaForPlyta(1));
+		
 	}
 
 }

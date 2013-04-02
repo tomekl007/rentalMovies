@@ -1,9 +1,13 @@
 package my.rental.mainP;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import my.rental.mainP.domain.Film;
+import my.rental.mainP.domain.Plyta;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -14,10 +18,20 @@ import org.springframework.stereotype.Component;
 public class ShoppingCart {
 	
 	
-	private List<Film> zamowioneFilmy = new LinkedList<Film>();
+	private Set<Film> zamowioneFilmy = new HashSet<Film>();
+	private Set<Plyta> zamowionePlyty = new HashSet<Plyta>();
 	
+	public Set<Plyta> getZamowionePlyty() {
+		return zamowionePlyty;
+	}
+
+	public void setZamowionePlyty(Set<Plyta> zamowionePlyty) {
+		System.out.println("set zamowione plyty : " + zamowionePlyty);
+		this.zamowionePlyty = zamowionePlyty;
+	}
+
 	public List<Film> getZamowioneFilmy() {
-		return zamowioneFilmy;
+		return new ArrayList(zamowioneFilmy);
 	}
 
 	public void addFilmToShoppingCart(Film f){
@@ -36,12 +50,26 @@ public class ShoppingCart {
 		for(Film f : zamowioneFilmy){
 			System.out.println("film : " + f);
 		
-			if(f.getTytulFilmu().equals(film.getTytulFilmu()))
+			if(f.getTytulFilmu().equals(film.getTytulFilmu())){
 				System.out.println("znalazlem !");
+				zamowioneFilmy.remove(f);
+				break;
+			}
 		}
 		
 		boolean result = zamowioneFilmy.remove(film);
 		System.out.println("deleting succes ? " + result);
+		
+	}
+
+	public void deleteAllFilmFromShoppingCart() {
+		zamowioneFilmy = new HashSet<Film>();
+		
+	}
+
+	public void cleanShoppingCart() {
+		zamowioneFilmy.clear();
+		zamowionePlyty.clear();
 		
 	}
  

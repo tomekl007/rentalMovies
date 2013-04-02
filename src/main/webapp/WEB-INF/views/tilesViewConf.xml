@@ -33,6 +33,17 @@
      
    </definition>
    
+   <definition name="klient/zamowieniePodsumowanie" extends="template">
+     <put-attribute name="content" value="/WEB-INF/views/zamowieniePodsumowanie.jsp" />
+     
+   </definition>
+   
+   
+   
+    <definition name="klient/dziekujemyZaZamowienie" extends="template">
+     <put-attribute name="content" value="/WEB-INF/views/dziekujemyZaZamowienie.jsp" />
+     
+   </definition>
    
    
     <definition name="login" extends="template">

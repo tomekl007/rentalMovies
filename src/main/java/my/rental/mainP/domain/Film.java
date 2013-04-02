@@ -148,5 +148,20 @@ public class Film {
 		return tytulFilmu + idFilmu;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Film))
+			return false;
+		Film otherFilm = (Film)obj;
+		
+		return this.tytulFilmu.equals(otherFilm.tytulFilmu)
+				&& this.rokProdukcji.equals(otherFilm.rokProdukcji);
+	}
+	
+	@Override
+	public int hashCode() {
+		return rokProdukcji * tytulFilmu.length();
+	}
+	
 
 }
