@@ -22,6 +22,19 @@
    </definition>
    
    
+   <definition name="gatunek/film" extends="template">
+     <put-attribute name="content" value="/WEB-INF/views/gatunekFilmList.jsp" />
+     
+   </definition>
+   
+   
+   <definition name="klient/zamowienie" extends="template">
+     <put-attribute name="content" value="/WEB-INF/views/filmZamowienie.jsp" />
+     
+   </definition>
+   
+   
+   
     <definition name="login" extends="template">
      <put-attribute name="content" value="/WEB-INF/views/login.jsp" />
      <put-attribute name="side" value="/WEB-INF/views/tiles/alreadyamember.jsp" />

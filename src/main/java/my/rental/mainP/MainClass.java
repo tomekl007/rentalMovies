@@ -62,6 +62,7 @@ public class MainClass {
 		
 		System.out.println(rs.getAllFilmy(2));
 		
+		System.out.println(rs.getALlFilmyForGatunek("akcja"));
 		
 	}
 

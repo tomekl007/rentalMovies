@@ -69,7 +69,7 @@ public class Aktor {
 	@Override
 	public String toString() {
 	
-	   return imieAktora +  " " + nazwiskoAktora;
+	   return imieAktora +  " " + nazwiskoAktora + idAktora;
 	}
 	
 

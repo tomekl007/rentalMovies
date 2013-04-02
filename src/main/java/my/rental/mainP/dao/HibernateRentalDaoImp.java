@@ -164,4 +164,23 @@ public class HibernateRentalDaoImp implements RentalDao {
 		return filmy;
 	}
 
+	@Override
+	public List<Gatunek> getAllGatunki() {
+		List<Gatunek> gatunki = template.loadAll(Gatunek.class);
+		System.out.println("find all : " + gatunki);
+		return gatunki;
+	}
+
+	@Override
+	public List<Film> getAllFilmyForGatunek(String nazwaGatunku) {
+		
+		//String query = "FROM Film f, IN (f.gatunki) AS g WHERE g.gatunekFilmu=?";
+		String query="FROM Film f inner join fetch f.gatunki as gat WHERE gat.gatunekFilmu=? ";
+		//List<Film> filmy = template.find(query);
+		List<Film> filmy = template.find(query,nazwaGatunku);
+		System.out.println("find filmy for gatunek : "+ filmy);
+		return filmy;
+
+	}
+
 }

@@ -48,6 +48,10 @@ public interface RentalDao {
 	List<Klient> getAllKlients();
 	
 	List<Film> getAllFilmy();
+	
+	List<Gatunek >getAllGatunki();
+
+	List<Film> getAllFilmyForGatunek(String nazwaGatunku);
 
 
 }

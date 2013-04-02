@@ -1,10 +1,15 @@
 drop table if exists film;
 drop table if exists aktor;
+drop table if exists cennik;
 drop table if exists aktor_film;
 drop table if exists rodzajRoli;
 drop table if exists gatunek;
 drop table if exists film_gatunek;
 drop table if exists doplata;
+drop table if exists plyta;
+drop table if exists klient;
+drop table if exists wypozyczenie;
+
 
 
 create table cennik (
@@ -21,6 +26,7 @@ create table film (
   rokProdukcji integer not null,
   rodzajFilmu varchar(30),
   adresOkladka varchar(300),
+  linkDoFilmweb varchar(300),
   foreign key (rodzajFilmu) references cennik(rodzajFilmu)
   
  );

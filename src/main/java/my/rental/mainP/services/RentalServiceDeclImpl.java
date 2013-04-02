@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import my.rental.mainP.dao.RentalDao;
 import my.rental.mainP.domain.Film;
+import my.rental.mainP.domain.Gatunek;
 import my.rental.mainP.domain.Klient;
 
 
@@ -40,6 +41,25 @@ public class RentalServiceDeclImpl implements RentalService {
 		List<Film> filmy = rentalDao.getAllFilmy();
 		System.out.println("find : " + filmy);
 		return filmy;
+		
+	}
+
+
+	@Override
+	public List<Gatunek> getAllGatunki() {
+		return rentalDao.getAllGatunki();
+	}
+
+
+	@Override
+	public List<Film> getALlFilmyForGatunek(String nazwaGatunku) {
+		 return rentalDao.getAllFilmyForGatunek(nazwaGatunku);
+	}
+
+
+	@Override
+	public Film findFilmById(long idFilmu) {
+		return rentalDao.getFilmById(idFilmu);
 		
 	}
 

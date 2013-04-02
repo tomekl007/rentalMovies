@@ -1,9 +1,13 @@
 package my.rental.mainP.controllers;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
+import my.rental.mainP.Utils;
+import my.rental.mainP.domain.Film;
 import my.rental.mainP.services.RentalService;
 
 
@@ -28,15 +32,32 @@ public class HomeController {
   public String showHomePage(Map<String, Object> model) {
 	  System.out.println("getting all filmy : " + 
 			  		rentalService.getAllFilmy(filmyPerPage));
+	  
+	  List<Film> nowosci = Utils.filtrFilmy(rentalService.getAllFilmy(filmyPerPage),"nowosc");
     model.put("filmy", 
-    		rentalService.getAllFilmy(filmyPerPage));
+    		nowosci);
+    
+    model.put("gatunki", rentalService.getAllGatunki());
     
     
     return "home";
   }
+  
+  
+//  @RequestMapping(value={"/menu"}, method=RequestMethod.GET)
+//  public String showAllGatunki(Map<String, Object> model) {
+//	  
+//	  System.out.println("in menu controller");
+//	  
+//    
+//    return "home";
+//  }
 
 
-  //<start id="spittlesPerPage"/> 
+ 
+
+
+//<start id="spittlesPerPage"/> 
   public static final int DEFAULT_FILMY_PER_PAGE = 25;
   
   private int filmyPerPage = DEFAULT_FILMY_PER_PAGE ;

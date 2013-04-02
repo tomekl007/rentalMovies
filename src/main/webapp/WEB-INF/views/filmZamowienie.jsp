@@ -4,16 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-<script type="text/javascript">
- function onClickWypozycz()
- {
- alert("click");
- }
-</script>
+
 
 <div>
-  <h2>Nasze filmy</h2>
-  <h3>zobacz co nowego mamy do zaoferowania!</h3>
+
+  <h3>Twoje zamowienie:</h3>
 
   <table class="filmyHome">
     <c:forEach var="film" items="${filmy}"> <!--<co id="cp_foreach_spittles"/>-->
@@ -55,28 +50,26 @@
        
       </td>
       
-       <s:url value="/klienci/wypozycz/{idFilmu}" 
-                  var="wypozycz_url" >    <!--<co id="cp_spitter_url"/>-->
+        <s:url value="/klienci/usun/{idFilmu}" 
+                  var="film_usun_url" >    <!--<co id="cp_spitter_url"/>-->
         <s:param name="idFilmu" 
                       value="${film.idFilmu}" />
       </s:url>
       
-      <sec:authorize access="isAuthenticated()">
       <td>
-      <input type="button" value="wypozycz" name="wypozycz"
-      onClick="location.href='${wypozycz_url}'"/>
-      <!-- onclick="onClickWypozycz()" />-->
-        
+      	<input type="button" value="usun" name="usunZKarty"
+           onClick="location.href='${film_usun_url}'" /> 
       </td>
-      </sec:authorize>
-       <sec:authorize access="!isAuthenticated()">
-      <td>
-      <input type="button" value="wypozycz" name="wypozycz" disabled="true"/>
       
-        
-      </td>
-      </sec:authorize>
-         </tr>
+    	</tr>
     </c:forEach>
+    
+     
+    
   </table>
+  <input type="button" value="kontynuuj wypozyczanie" name="kontynuujWypozyczanie"
+           onClick="location.href='/mainP'" />    
+  <input type="button" value="zakoncz" name="zakoncz"
+       onClick="location.href='/mainP'" /> 
+  
 </div>

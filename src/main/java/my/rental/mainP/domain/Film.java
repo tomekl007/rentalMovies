@@ -25,6 +25,14 @@ public class Film {
 	private String tytulFilmu;
 	private String adresOkladka;
 	
+	private String linkDoFilmweb;
+	
+	public String getLinkDoFilmweb() {
+		return linkDoFilmweb;
+	}
+	public void setLinkDoFilmweb(String linkDoFilmweb) {
+		this.linkDoFilmweb = linkDoFilmweb;
+	}
 	public String getAdresOkladka() {
 		return adresOkladka;
 	}
@@ -137,7 +145,7 @@ public class Film {
 	@Override
 	public String toString() {
 	
-		return tytulFilmu;
+		return tytulFilmu + idFilmu;
 	}
 	
 

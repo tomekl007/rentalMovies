@@ -4,16 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-<script type="text/javascript">
- function onClickWypozycz()
- {
- alert("click");
- }
-</script>
+
 
 <div>
-  <h2>Nasze filmy</h2>
-  <h3>zobacz co nowego mamy do zaoferowania!</h3>
+  
+  <h3>filmy z gatunku ${gatunek}</h3>
 
   <table class="filmyHome">
     <c:forEach var="film" items="${filmy}"> <!--<co id="cp_foreach_spittles"/>-->
@@ -32,7 +27,7 @@
           - <c:out value="${film.rokProdukcji}" /><br/>
           <c:out value="${film.gatunki} "/> 
            <input type="button" value="wiecej" name="wiecej"
-           onClick="location.href='${film.linkDoFilmweb}'" />         
+           onClick="location.href='${film.linkDoFilmweb}'" />               
       </p>
       </td>
       	
@@ -55,7 +50,7 @@
        
       </td>
       
-       <s:url value="/klienci/wypozycz/{idFilmu}" 
+      <s:url value="/klienci/wypozycz/{idFilmu}" 
                   var="wypozycz_url" >    <!--<co id="cp_spitter_url"/>-->
         <s:param name="idFilmu" 
                       value="${film.idFilmu}" />

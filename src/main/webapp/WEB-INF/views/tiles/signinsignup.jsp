@@ -48,8 +48,8 @@
                 var="logout_url" /> 
 	  <a href="${logout_url}">Wyloguj</a>
 	  <sec:authorize url="/admin">
-      <s:url value="/admin" var="admin_url" />
-	    <br/><a href="${admin_url}">Admin</a>
+      <s:url value="/klienci/konto" var="konto_url" />
+	    <br/><a href="${konto_url}">Moje konto</a>
 	  </sec:authorize>
 	</sec:authorize>
 </div>

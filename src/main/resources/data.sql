@@ -1,34 +1,58 @@
 insert into cennik(rodzajFilmu, oplataZa1Dzien) values ('normalny',10.00);
 insert into cennik(rodzajFilmu, oplataZa1Dzien) values ('hit',15.00);
-insert into film (tytulFilmu, rokProdukcji,rodzajFilmu) values ('batman', 2009, 'normalny');
-insert into film (tytulFilmu, rokProdukcji,rodzajFilmu) values ('matrix', 2010, 'normalny');
-insert into film (tytulFilmu, rokProdukcji,rodzajFilmu) values ('hoobbit', 2013, 'hit');
+insert into cennik(rodzajFilmu, oplataZa1Dzien) values ('nowosc',12.00);
+
+insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka) values ('batman', 2009, 'normalny','http://images.wikia.com/batman/images/b/b0/The-dark-knight-got-milk.jpg');
+insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka) values ('matrix', 2010, 'normalny','http://1.fwcdn.pl/po/06/28/628/7495038.3.jpg?l=1350559192000');
+insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka) values ('hoobbit', 2013, 'hit','http://3.bp.blogspot.com/-flkCoivN-xM/UOw-rCCRo7I/AAAAAAAACkw/rRnfnKHcpaw/s1600/The-Hobbit-1024x1024.jpg');
+insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka) values ('atlas chmur', 2013, 'nowosc','http://ecsmedia.pl/c/cloud-atlas-atlas-chmur-b-iext12978565.jpg');
+insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka) values ('djanngo', 2013, 'nowosc','http://4.bp.blogspot.com/-lr_tfZRP8qY/UPvNAZnYsKI/AAAAAAAAGCs/T51lLmuzGUc/s1600/django-unchained-poster3.jpg');
+insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka) values ('operacja argo', 2013, 'nowosc','http://1.fwcdn.pl/po/41/65/614165/7496968.3.jpg?l=1351310746000');
+insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka,idFilmu) values ('szeregowiec ryan', 2000, 'normalny','/resources/images/ryan.jpg',99);
+
+
 
 insert into aktor (imieAktora, nazwiskoAktora) values ('christian','Bale');
 insert into aktor (imieAktora, nazwiskoAktora) values ('leaonardo','dicaprio');
 insert into aktor (imieAktora, nazwiskoAktora) values ('ian','mckallen');
+insert into aktor (imieAktora, nazwiskoAktora) values ('Tom','Hanks');
+insert into aktor (imieAktora, nazwiskoAktora) values ('BEn','Afflec');
+insert into aktor (imieAktora, nazwiskoAktora) values ('Matt','Damon');
+
 
 
 insert into aktor_film (idFilmu, idAktora,rola) values (1,1,'bruce wayne');
-insert into aktor_film (idFilmu, idAktora,rola) values (2,3,'gandalf');
+insert into aktor_film (idFilmu, idAktora,rola) values (3,3,'gandalf');
+insert into aktor_film (idFilmu, idAktora,rola) values (4,4,'wedrowiec');
+insert into aktor_film (idFilmu, idAktora,rola) values (6,2,'clyde');
+insert into aktor_film (idFilmu, idAktora,rola) values (2,5,'agent CIA');
+insert into aktor_film (idFilmu, idAktora,rola) values (99,4,'szef brygady');
+insert into aktor_film (idFilmu, idAktora,rola) values (99,6,'szeregowiec Ryan');
 
 insert into gatunek (gatunekFilmu) values ('dramat');
 insert into gatunek (gatunekFilmu) values ('sensacyjny');
 insert into gatunek (gatunekFilmu) values ('fantasy');
+insert into gatunek (gatunekFilmu) values ('akcja');
+insert into gatunek (gatunekFilmu) values ('bajka');
+insert into gatunek (gatunekFilmu) values ('komedia');
 
 insert into film_gatunek(idFilmu,gatunekFilmu) values (1,'dramat');
 insert into film_gatunek(idFilmu,gatunekFilmu) values (1,'sensacyjny');
-
 insert into film_gatunek(idFilmu,gatunekFilmu) values (2,'fantasy');
+insert into film_gatunek(idFilmu,gatunekFilmu) values (2,'akcja');
+insert into film_gatunek(idFilmu,gatunekFilmu) values (3,'fantasy');
+insert into film_gatunek(idFilmu,gatunekFilmu) values (4,'fantasy');
+insert into film_gatunek(idFilmu,gatunekFilmu) values (5,'dramat');
+insert into film_gatunek(idFilmu,gatunekFilmu) values (5,'komedia');
+insert into film_gatunek(idFilmu,gatunekFilmu) values (5,'akcja');
+insert into film_gatunek(idFilmu,gatunekFilmu) values (6,'akcja');
 
 insert into plyta(idFilmu) values(1);
 insert into plyta(idFilmu) values(1);
 insert into plyta(idFilmu) values(2);
 
-
 insert into klient(nazwiskoKlienta,password,login) values('kowalski','1234','kow');
 insert into klient(nazwiskoKlienta,password,login) values('nowak','1234','now');
-
 
 insert into wypozyczenie (idPlyty,idKlienta) values (1,1);
 insert into wypozyczenie (idPlyty,idKlienta) values (2,1);
