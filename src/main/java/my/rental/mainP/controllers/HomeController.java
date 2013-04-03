@@ -44,6 +44,35 @@ public class HomeController {
   }
   
   
+  @RequestMapping(value={"/polecane"}, method=RequestMethod.GET)
+  public String showPolecaneFilmy(Map<String, Object> model) {
+	  System.out.println("getting all filmy : " + 
+			  		rentalService.getAllFilmy(filmyPerPage));
+	  
+	  List<Film> nowosci = Utils.filtrFilmy(rentalService.getAllFilmy(filmyPerPage),"hit");
+    model.put("filmy", 
+    		nowosci);
+    
+    model.put("gatunki", rentalService.getAllGatunki());
+    
+    
+    return "polecaneFilmy";
+  }
+  
+  
+  
+  @RequestMapping(value={"/kontakt"}, method=RequestMethod.GET)
+  public String shoKontaktPage(Map<String, Object> model) {
+	 
+	String kontakt = "500 134 424 Krakow ";//it should not be hardcoded  
+    
+    model.put("gatunki", rentalService.getAllGatunki());
+    model.put("kontakt",kontakt);
+    
+    
+    return "kontaktPage";
+  }
+  
 //  @RequestMapping(value={"/menu"}, method=RequestMethod.GET)
 //  public String showAllGatunki(Map<String, Object> model) {
 //	  

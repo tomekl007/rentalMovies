@@ -68,6 +68,20 @@
      
    </definition>
    
+   
+   
+     <definition name="polecaneFilmy" extends="template">
+     <put-attribute name="content" value="/WEB-INF/views/polecaneFilmyHome.jsp" />
+     
+   </definition>
+   
+   <definition name="kontaktPage" extends="template">
+     <put-attribute name="content" value="/WEB-INF/views/kontaktowa.jsp" />
+     
+   </definition>
+   
+  
+   
 
    
    

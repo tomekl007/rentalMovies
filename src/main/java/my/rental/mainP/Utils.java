@@ -17,8 +17,8 @@ public class Utils {
 			  if(f.getRodzajFilmu().getRodzajFilmu().equals(filtr))
 				  wynik.add(f);
 		  }
-		  //return wynik;
-		  return allFilmy;
+		  return wynik;
+		 // return allFilmy;
 	}
 
 	
