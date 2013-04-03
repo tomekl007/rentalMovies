@@ -1,5 +1,6 @@
 package my.rental.mainP.domain;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,7 +20,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 
 @Entity
-public class Film {
+public class Film implements Serializable {
 	@Id
 	private Long idFilmu;
 	private String tytulFilmu;
@@ -145,7 +146,7 @@ public class Film {
 	@Override
 	public String toString() {
 	
-		return tytulFilmu + idFilmu;
+		return tytulFilmu;
 	}
 	
 	@Override

@@ -1,5 +1,6 @@
 package my.rental.mainP.domain;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,7 +14,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
-public class Aktor {
+public class Aktor implements Serializable {
 	
 	@Id
 	//@GeneratedValue(strategy = IDENTITY)

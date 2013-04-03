@@ -11,11 +11,12 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Klient {
+public class Klient implements Serializable {
 	
 	@Id
 	private long idKlienta;

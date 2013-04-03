@@ -1,5 +1,7 @@
 package my.rental.mainP.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,7 +16,7 @@ import javax.persistence.Table;
 //@Table(name="aktor_film")
 @Entity
 @IdClass(Aktor_filmId.class)
-public class Aktor_film {
+public class Aktor_film implements Serializable {
 	
 	@Id
 	private long idAktora;

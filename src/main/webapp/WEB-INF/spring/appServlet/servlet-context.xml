@@ -50,5 +50,20 @@
 	
 	  <!--  to using scheduling annotations -->
   <task:annotation-driven/>
+  
+  
+  <!--  REST  -->
+  <!-- ContentNegotiationViewResolver for RESTfull -->
+<beans:bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+	<beans:property name="mediaTypes">
+		<beans:map>
+			<beans:entry key="json" value="application/json"/>
+   			<beans:entry key="xml" value="text/xml"/>
+			<beans:entry key="htm" value="text/html"/>
+		</beans:map>
+	</beans:property>
+	<beans:property name="defaultContentType" value="text/html"/>
+</beans:bean>
+  
 	
 </beans:beans>

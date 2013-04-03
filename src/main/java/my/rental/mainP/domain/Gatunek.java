@@ -1,5 +1,6 @@
 package my.rental.mainP.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -13,7 +14,7 @@ import org.hibernate.annotations.LazyCollection;
 
 
 @Entity
-public class Gatunek {
+public class Gatunek implements Serializable {
 	
 	@Id
 	private String gatunekFilmu;

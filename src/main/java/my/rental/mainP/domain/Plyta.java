@@ -1,5 +1,6 @@
 package my.rental.mainP.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,7 +17,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 
 @Entity
-public class Plyta {
+public class Plyta implements Serializable {
 	
 	@Id
 	private long idPlyty;

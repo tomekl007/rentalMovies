@@ -1,5 +1,6 @@
 package my.rental.mainP.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -13,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Wypozyczenie {
+public class Wypozyczenie implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "idKlienta")

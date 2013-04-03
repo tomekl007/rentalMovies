@@ -1,5 +1,7 @@
 package my.rental.mainP.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +14,7 @@ import org.hibernate.annotations.Parameter;
 
 
 @Entity
-public class Doplata {
+public class Doplata implements Serializable {
 	
 	
 	
