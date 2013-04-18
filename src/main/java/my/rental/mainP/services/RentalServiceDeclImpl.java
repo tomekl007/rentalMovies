@@ -156,4 +156,10 @@ public class RentalServiceDeclImpl implements RentalService {
 		
 	}
 
+
+	@Override
+	public List<String> getALlNazwyFilmyForGatunek(String nazwaGatunku) {
+		return rentalDao.getAllNazwyFilmForGatunek(nazwaGatunku);
+	}
+
 }

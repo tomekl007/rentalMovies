@@ -21,6 +21,7 @@ public class MainClass {
 		ctx.load("/database-context.xml");
 		ctx.refresh();
 		
+		
 		HibernateRentalDaoImp daoImp = ctx.getBean("databaseFacade", HibernateRentalDaoImp.class);
 		
 		

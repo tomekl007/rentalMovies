@@ -82,6 +82,15 @@ public class HomeController {
 //    return "home";
 //  }
 
+  
+  @RequestMapping(value="/ajax", method={RequestMethod.GET, RequestMethod.PUT})
+  public String getToAjaxPlay() {
+	 
+	
+   
+    return "ax";
+    
+ }
 
  
 

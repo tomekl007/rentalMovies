@@ -68,5 +68,7 @@ public interface RentalDao {
 
 	void setDataZwrotuForWypozyczenie(Wypozyczenie wypozyczenie);
 
+	List<String> getAllNazwyFilmForGatunek(String nazwaGatunku);
+
 
 }

@@ -3,6 +3,8 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
+
 <div>
      
      <table class="listaGatunki">
@@ -32,9 +34,15 @@
       
       </td>
     </tr>
+    	
       	
     
     </c:forEach>
+ <!--    <tr>
+    	 <td>
+    	  <input type="button" value="ajaxButton" name="ajaxButton" onclick="onClickFindFilmy()" />
+    	 </td>
+    	</tr>-->
   </table>
 	  
 </div>

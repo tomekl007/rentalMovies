@@ -35,4 +35,6 @@ public interface RentalService {
 
 	void setDataZwrotuForWypozyczenie(Wypozyczenie wypozyczenie);
 
+	List<String> getALlNazwyFilmyForGatunek(String nazwaGatunku);
+
 }

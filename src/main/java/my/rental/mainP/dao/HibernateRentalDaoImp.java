@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -239,6 +240,18 @@ public class HibernateRentalDaoImp implements RentalDao {
 	public void setDataZwrotuForWypozyczenie(Wypozyczenie wypozyczenie) {
 		template.saveOrUpdate(wypozyczenie);
 		
+	}
+
+	@Override
+	public List<String> getAllNazwyFilmForGatunek(String nazwaGatunku) {
+		List<Film> filyForGatunel = this.getAllFilmyForGatunek(nazwaGatunku);
+		List<String> tytuly = new LinkedList<String>();
+		for(Film f : filyForGatunel){
+			tytuly.add(f.getTytulFilmu());
+		}
+		
+		System.out.println("find tytuly : " + tytuly);
+		return tytuly;
 	}
 
 }
