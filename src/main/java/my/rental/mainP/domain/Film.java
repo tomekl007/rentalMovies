@@ -17,12 +17,18 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 
 @Entity
+@Indexed
 public class Film implements Serializable {
 	@Id
+	@DocumentId
 	private Long idFilmu;
+	@Field
 	private String tytulFilmu;
 	private String adresOkladka;
 	
@@ -46,6 +52,7 @@ public class Film implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "rodzajFilmu")
 	private Cennik rodzajFilmu;
+	@Field
 	private Integer rokProdukcji;
 	
 	

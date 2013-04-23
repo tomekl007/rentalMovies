@@ -59,6 +59,8 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
     
    </list>
   </property>
+ <!--  <property name="hibernate.search.default.indexBase" value="/resources/"/>-->
+  
  </bean>
  
   <!--<start id="bean_hibernateTemplate" />--> 
@@ -70,20 +72,20 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
  <!-- transactions -->
  
  	<tx:annotation-driven/>
- 	
+ 
  	 <!-- declarative by aspect -->
  <bean id="rentalService" class="my.rental.mainP.services.RentalServiceDeclImpl">
+ <!-- <property name="sessionFactory" ref="sessionFactory"/>-->
   <!-- <property name="rentalDao" ref="databaseFacade"/>-->
  </bean>
 
 
- 
+ <!-- 
 <tx:advice id="txAdvice"> 
     <tx:attributes> 
       <tx:method name="add*" propagation="REQUIRED" /> 
       <tx:method name="save*" propagation="REQUIRED" /> 
-      <tx:method name="*" propagation="SUPPORTS" 
-          read-only="true"/> 
+      <tx:method name="*" propagation="REQUIRED" /> 
     </tx:attributes> 
   </tx:advice> 
   
@@ -92,9 +94,20 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
         pointcut="execution(* *..RentalService.*(..))"
         advice-ref="txAdvice" />
   </aop:config>
- 
+ -->
 
+<!-- hiberante search -->
+<!--  
+<bean id="hse" class="my.rental.mainP.dao.HibernateSearchExperiment"/>
+ -->
+ <!-- <bean
+        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+        id="entityManagerFactory">
+        <property name="persistenceProvider" ref="org.hibernate.ejb.HibernatePersistence"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>-->
+   <!--  
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+  -->
   
- 
-
 </beans>

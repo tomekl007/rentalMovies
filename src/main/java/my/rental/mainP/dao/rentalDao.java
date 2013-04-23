@@ -5,6 +5,9 @@ package my.rental.mainP.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 import my.rental.mainP.domain.Aktor;
 import my.rental.mainP.domain.Cennik;
 import my.rental.mainP.domain.Doplata;
@@ -70,5 +73,8 @@ public interface RentalDao {
 
 	List<String> getAllNazwyFilmForGatunek(String nazwaGatunku);
 
+	public Session getCurrentSession();
+	
+	public SessionFactory getSessionFactory();
 
 }

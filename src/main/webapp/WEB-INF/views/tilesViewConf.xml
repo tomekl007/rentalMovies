@@ -85,7 +85,14 @@
      
    </definition>
    
+ <definition name="hibernateSearch" extends="template">
+     <put-attribute name="content" value="/WEB-INF/views/hibSearch.jsp" />
+     
+   </definition>
+   
 
+   
+   
    
    
    

@@ -7,9 +7,19 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.Search;
+import org.hibernate.sql.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import my.rental.mainP.domain.Aktor;
 import my.rental.mainP.domain.Aktor_film;
@@ -25,17 +35,30 @@ import my.rental.mainP.domain.Wypozyczenie;
 
 
 @Component
+@Transactional
 public class HibernateRentalDaoImp implements RentalDao {
 	
 	
 	@Autowired
 	  private HibernateTemplate template;
-
+	
+	
+	public Session getCurrentSession(){
+		SessionFactory sf = template.getSessionFactory();
+		System.out.println("RentalDao : getting currentSessionFactory : " + sf);
+		return sf.getCurrentSession();
+		
+	}
+	
+	
+	
 	@Override
 	public Film getFilmById(long id) {
 		Film film = template.get(Film.class, id);
 		System.out.println("getFilmByid found : "+ film);
 		return film;
+		
+		
 	}
 
 	@Override
@@ -252,6 +275,13 @@ public class HibernateRentalDaoImp implements RentalDao {
 		
 		System.out.println("find tytuly : " + tytuly);
 		return tytuly;
+	}
+
+
+
+	@Override
+	public SessionFactory getSessionFactory() {
+		return template.getSessionFactory();
 	}
 
 }

@@ -3,6 +3,7 @@ package my.rental.mainP;
 
 
 import my.rental.mainP.dao.HibernateRentalDaoImp;
+import my.rental.mainP.dao.HibernateSearchExperiment;
 import my.rental.mainP.domain.Aktor;
 import my.rental.mainP.domain.Aktor_film;
 import my.rental.mainP.domain.Film;
@@ -66,6 +67,10 @@ public class MainClass {
 		System.out.println(rs.getALlFilmyForGatunek("akcja"));
 		
 		System.out.println(daoImp.getAllWypozyczeniaForPlyta(1));
+		
+		HibernateSearchExperiment hs = new HibernateSearchExperiment();
+		//hs.indexAllRecords();
+		hs.indexWithHibernate();
 		
 	}
 

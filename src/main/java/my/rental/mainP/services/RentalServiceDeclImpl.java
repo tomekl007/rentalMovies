@@ -9,6 +9,17 @@ import java.util.Set;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.queryParser.QueryParser;
+import org.apache.lucene.search.Query;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.search.FullTextQuery;
+import org.hibernate.search.FullTextSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +37,76 @@ import my.rental.mainP.domain.Wypozyczenie;
 public class RentalServiceDeclImpl implements RentalService {
 
 	RentalDao rentalDao;
+	
+	
+	 
+   /*private SessionFactory sessionFactory;
+	 
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+	//@Autowired
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		System.out.println("autowired sessionFactory : " + sessionFactory);
+		this.sessionFactory = sessionFactory;
+	}*/
+	
+	@Transactional
+	public void indexWithHibernate() {
+		ApplicationContext ac;
+		
+		
+		System.out.println("indexing with hibernate");
+		//System.out.println(sessionFactory==null? "sesF is null" : sessionFactory);
+		
+		Session session = rentalDao.getSessionFactory().getCurrentSession();
+		System.out.println(session==null? "session is null" : session);
+		//wrap a Session object
+		
+		FullTextSession ftSession = org.hibernate.search.Search.getFullTextSession(session);
+		//ftSession.getTransaction().begin();
+		
+		@SuppressWarnings("unchecked")
+		List<Film> items = session.createCriteria(Film.class).list();
+		
+		for (Film item : items) {
+		    ftSession.index(item);  //manually index an item instance
+		}
+		
+		//ftSession.getTransaction().commit(); //index are written at commit time
+	}
+	
+	
+	public List<Film> search() {
+		//Building the Lucene query
+		String searchQuery = "tytulFilmu:Batman OR rokProdukcji:2000";  //query string
+		QueryParser parser = new QueryParser(org.apache.lucene.util.Version.LUCENE_36,
+				"title",  //default field 
+				new StandardAnalyzer(org.apache.lucene.util.Version.LUCENE_36) //analyzer used
+		);
+
+		Query luceneQuery;
+		try {
+		    luceneQuery = parser.parse(searchQuery);  //build Lucene query
+		}
+		catch (ParseException e) {
+		    throw new RuntimeException("Unable to parse query: " + searchQuery, e);
+		}
+		
+		Session session = rentalDao.getSessionFactory().getCurrentSession();
+		FullTextSession ftSession = org.hibernate.search.Search.getFullTextSession(session);
+		
+		FullTextQuery query =  ftSession.createFullTextQuery(luceneQuery, Film.class);
+		
+		@SuppressWarnings("unchecked")
+		final List<Film> results = query.list();  //execute the query
+		System.out.println("results :" + results );
+		return results;
+	}
+	
+	
+	
+	//Session session = sessionFactory.getCurrentSession();
 	
 	@Resource(name="databaseFacade")
 	public void setRentalDao(RentalDao rentalDao) {
