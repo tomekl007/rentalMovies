@@ -9,17 +9,23 @@ import javax.persistence.ManyToMany;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import org.hibernate.annotations.LazyCollection;
+import org.hibernate.search.annotations.ContainedIn;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 
 
 
 @Entity
+@Indexed
 public class Gatunek implements Serializable {
 	
 	@Id
+	@Field
 	private String gatunekFilmu;
 	
 	@ManyToMany(mappedBy="gatunki")
+	@ContainedIn
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Film> filmy;
 	

@@ -77,4 +77,6 @@ public interface RentalDao {
 	
 	public SessionFactory getSessionFactory();
 
+	void saveFilm(Film f);
+
 }

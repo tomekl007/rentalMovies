@@ -38,5 +38,10 @@ public interface RentalService {
 	List<String> getALlNazwyFilmyForGatunek(String nazwaGatunku);
 	void indexWithHibernate();
 	List<Film> search();
+	
+	List<Klient>searchMultipleFieldsInKlient();
+	String checkStemmingIndex();
+	void efficientIndexing();
+	void addFilm(Film f);
 
 }

@@ -190,7 +190,21 @@
 	<artifactId>solr-core</artifactId>
 	<version>4.2.0</version>
 </dependency>
-            -->
+   -->
+<dependency>
+	<groupId>org.apache.solr</groupId>
+	<artifactId>solr-core</artifactId>
+	<version>3.6.2</version>
+</dependency>
+
+<dependency>
+	<groupId>org.apache.solr</groupId>
+	<artifactId>solr-common</artifactId>
+	<version>1.3.0</version>
+</dependency>
+            
+            
+         
             
             
 		

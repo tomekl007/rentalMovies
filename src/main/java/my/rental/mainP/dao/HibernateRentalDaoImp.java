@@ -16,6 +16,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
 import org.hibernate.sql.Template;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Component;
@@ -38,6 +40,7 @@ import my.rental.mainP.domain.Wypozyczenie;
 @Transactional
 public class HibernateRentalDaoImp implements RentalDao {
 	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	  private HibernateTemplate template;
@@ -282,6 +285,16 @@ public class HibernateRentalDaoImp implements RentalDao {
 	@Override
 	public SessionFactory getSessionFactory() {
 		return template.getSessionFactory();
+	}
+
+
+
+	@Override
+	public void saveFilm(Film f) {
+		System.out.println("saving film : " + f);
+		logger.info("saving film : " + f);
+		template.saveOrUpdate(f);
+		
 	}
 
 }

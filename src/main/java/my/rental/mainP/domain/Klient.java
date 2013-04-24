@@ -10,15 +10,20 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Indexed
 public class Klient implements Serializable {
 	
 	@Id
+	@DocumentId
 	private long idKlienta;
 	
 	@Size(min=3, max=20, message=
@@ -30,9 +35,11 @@ public class Klient implements Serializable {
 		      "Username must be between 3 and 20 characters long.") //<co id="co_enforceSize"/> 
 		  @Pattern(regexp="^[a-zA-Z0-9]+$",
 		        message="Username must be alphanumeric with no spaces")  //<co id="co_noSpaces"/>
+	@Field
 	private String imieKlienta;
 	private String plec;
 	private Date dataWprowadzenia ;
+	@Field
 	private String login;
 	  @Size(min=6, max=20,
 	          message="The password must be at least 6 characters long.") //<co id="co_enforceSize

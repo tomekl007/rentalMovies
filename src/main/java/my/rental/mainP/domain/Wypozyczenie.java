@@ -13,19 +13,27 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.hibernate.search.annotations.DateBridge;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.Resolution;
+
 @Entity
+@Indexed
 public class Wypozyczenie implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "idKlienta")
 	Klient klient;
 	
-	@Id
+	@Id @DocumentId
 	@GeneratedValue
     @Column(name="idWypozyczenia")
 	private long idWypozyczenia;
 	
 	//Plyta plyta
+	@DateBridge(resolution=Resolution.DAY)
 	private Date dataWypozyczenia;
 	private Date dataZwrotu;
 	
@@ -35,6 +43,7 @@ public class Wypozyczenie implements Serializable {
 	private Plyta plyta;
 	
 	@OneToOne(mappedBy="wypozyczenie", cascade=CascadeType.ALL)
+	@IndexedEmbedded
 	Doplata doplata;
 	
 	public Doplata getDoplata() {

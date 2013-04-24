@@ -15,23 +15,120 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+
+import org.apache.solr.analysis.LowerCaseFilterFactory;
+import org.apache.solr.analysis.NGramFilterFactory;
+import org.apache.solr.analysis.PhoneticFilterFactory;
+import org.apache.solr.analysis.SnowballPorterFilterFactory;
+import org.apache.solr.analysis.StandardFilterFactory;
+import org.apache.solr.analysis.StandardTokenizerFactory;
+import org.apache.solr.analysis.StopFilterFactory;
+import org.apache.solr.analysis.StandardTokenizerFactory;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.search.annotations.Analyzer;
+import org.hibernate.search.annotations.AnalyzerDef;
+import org.hibernate.search.annotations.AnalyzerDefs;
+import org.hibernate.search.annotations.Boost;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Fields;
+import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.Store;
+import org.hibernate.search.annotations.TermVector;
+import org.hibernate.search.annotations.TokenizerDef;
+import org.hibernate.search.annotations.TokenFilterDef;
+import org.hibernate.search.annotations.Parameter;
 
 
 @Entity
 @Indexed
+
+@AnalyzerDefs( {
+@AnalyzerDef(name="applicationanalyzer",   //analyzer definition name 
+tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class ),  //tokenizer factory
+filters = { @TokenFilterDef(factory=LowerCaseFilterFactory.class),  //filter factory 
+            @TokenFilterDef(factory = StopFilterFactory.class,
+                    params = {  @Parameter(name="words",   //parameters passed to the filter factory 
+                    		               value="my/rental/mainP/stopwords.txt"),
+                                @Parameter(name="ignoreCase", value="true") } ) 
+} ),
+
+@AnalyzerDef(name="phonetic",
+tokenizer =
+@TokenizerDef(factory = StandardTokenizerFactory.class ),
+filters = {
+@TokenFilterDef(factory = StandardFilterFactory.class),
+@TokenFilterDef(factory = StopFilterFactory.class,
+params = @Parameter(name="words", value="my/rental/mainP/stopwords.txt") ),
+@TokenFilterDef(factory = PhoneticFilterFactory.class,
+params = {
+@Parameter(name="encoder", value="DoubleMetaphone"),
+@Parameter(name="inject", value="false")
+} )
+}),
+
+@AnalyzerDef(name="englishSnowball",
+tokenizer = @TokenizerDef(factory = StandardTokenizerFactory.class ),
+filters = { @TokenFilterDef(factory=StandardFilterFactory.class),
+			@TokenFilterDef(factory=LowerCaseFilterFactory.class),
+            @TokenFilterDef(factory = StopFilterFactory.class,    //stop word factory
+                    params = {  @Parameter(name="words",  
+                    		               value="my/rental/mainP/stopwords.txt"),  //file containing stop words
+                                @Parameter(name="ignoreCase", value="false") } ), 
+            @TokenFilterDef(factory = SnowballPorterFilterFactory.class,  //use Snowball filter
+                    params = @Parameter(name="language", value="English") )  //define the language
+} ),
+@AnalyzerDef(
+		   name="ngramanalyzer",
+		   tokenizer=@TokenizerDef(factory=StandardTokenizerFactory.class),
+		   filters={
+		       @TokenFilterDef(factory=NGramFilterFactory.class,
+		              params={
+		         @Parameter(name="minGramSize",value="3"),
+		         @Parameter(name="maxGramSize",value="3")           
+		       }),
+		       
+		       @TokenFilterDef(factory=LowerCaseFilterFactory.class),
+		       @TokenFilterDef(factory = StopFilterFactory.class,
+               params = {  @Parameter(name="words",   //parameters passed to the filter factory 
+               		               value="my/rental/mainP/stopwords.txt"),
+                           @Parameter(name="ignoreCase", value="true") })
+		       })
+
+})
+
+@Analyzer(definition="applicationanalyzer")  //Use a pre defined analyzer
 public class Film implements Serializable {
 	@Id
 	@DocumentId
 	private Long idFilmu;
-	@Field
+//	@Field//default is tokenization
+	//if i don not want tokenization :
+	//@Field(index=Index.UN_TOKENIZED)
+	//to store property in lucene index : 
+	//@Field(store=Store.YES)
+	//value is stored compressed:
+	//@Field(store=Store.COMPRESS)
+	
+	@Fields( { 
+		@Field(index=Index.TOKENIZED, store=Store.YES),
+		@Field(name="tytulFilmu_phonetic",
+				analyzer=@Analyzer(definition="phonetic")),
+		@Field(name="tytulFilmu_stemmer", 
+				analyzer=@Analyzer(definition="englishSnowball"))  //title_stemmer uses Snowball fitler
+	})
+	
 	private String tytulFilmu;
 	private String adresOkladka;
 	
+	
+	@Field(name="linkDoFilmweb_ngram",
+			index=Index.TOKENIZED,
+			analyzer=@Analyzer(definition="ngramanalyzer"))
+	@Boost(0.2f)
 	private String linkDoFilmweb;
 	
 	public String getLinkDoFilmweb() {
@@ -52,7 +149,7 @@ public class Film implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "rodzajFilmu")
 	private Cennik rodzajFilmu;
-	@Field
+	@Field(termVector=TermVector.YES)//store occurence statistic 
 	private Integer rokProdukcji;
 	
 	
@@ -91,6 +188,7 @@ public class Film implements Serializable {
 			inverseJoinColumns = { @JoinColumn(name = "gatunekFilmu",
 					nullable = false, updatable = false) } )
 	@LazyCollection(LazyCollectionOption.FALSE)
+	@IndexedEmbedded
 	private List<Gatunek> gatunki;
 	
 	
