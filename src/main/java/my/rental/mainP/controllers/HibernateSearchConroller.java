@@ -1,5 +1,7 @@
 package my.rental.mainP.controllers;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import my.rental.mainP.dao.HibernateSearchExperiment;
@@ -73,6 +75,50 @@ public class HibernateSearchConroller {
 		rentalService.efficientIndexing();
 		return "hibernateSearch";
 	}
+	
+	@RequestMapping(value={"/searchScroll"})
+	public String searchScrollable(){
+		System.out.println("efficient indexing");
+		rentalService.displayMediumResultsByMatchingTitle("Batma~", 5);
+		return "hibernateSearch";
+	}
+	
+	@RequestMapping(value={"/luckyShot"})
+	public String luckySearch(){
+		rentalService.displayIMFeelingLuckyByMatchingTitle("Batma~");
+		return "hibernateSearch";
+	}
+	
+	@RequestMapping(value={"/pagination"})
+	public String getWithPagination(){
+		int pageNr = 1;
+		int window = 1;//only for testing !
+		for(;pageNr<3;pageNr++){
+		List<String> res = rentalService.displayAllByMatchingTitleWithPagination("Batma~", pageNr , window);
+		 System.out.println("for page nr : " + pageNr + " result : " + res);
+		
+		}
+		return "hibernateSearch";
+	}
+	
+
+	@RequestMapping(value={"/projectionKlient"})
+	public String displayProjectionForKlient(){
+		List<String> res = rentalService.displayProjectionByMatchingKlient("admin");
+		
+		System.out.println("result of projetion : " + res);
+		return "hibernateSearch";
+	}
+	
+	@RequestMapping(value={"/score"})
+	public String displayScoreForFilm(){
+		List<String> res = rentalService.displayProjectionAndMetadataByMatchingTitle("batman") ;
+		
+		System.out.println("result of score : " + res);
+		return "hibernateSearch";
+	}
+	
+	
 	
 	
 	

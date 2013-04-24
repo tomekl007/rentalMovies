@@ -190,6 +190,7 @@ public class RentalServiceDeclImpl implements RentalService {
 			//return matching results
 			hibQuery = ftSession.createFullTextQuery(query);
 			results =  hibQuery.list();
+			
 			System.out.println("after stemmed search : " + results);
 			//we should find more matches than the exact query
 			if ( results.size() <= exactResultSize ) {   //more matching results are found 
@@ -414,5 +415,179 @@ public class RentalServiceDeclImpl implements RentalService {
 		//tx.commit();
 		
 	}
+	
+	public List<String> displayMediumResultsByMatchingTitle(String words, int n) {
+		Session s = rentalDao.getCurrentSession();
+		FullTextSession session = org.hibernate.search.Search.getFullTextSession(s);
+		
+		org.apache.lucene.search.Query luceneQuery = buildLuceneQuery(words, Film.class);
+	
+		FullTextQuery query = session.createFullTextQuery(luceneQuery, Film.class);
+		
+		query.setFetchSize(n);   //define fetch size
+		ScrollableResults items = query.scroll();  //retrieve a ScrollableResults
+		
+		List<String> results = new ArrayList<String>();
+		try {
+			items.beforeFirst();    //go to the first position
+			//get the jump to the position before the medium element
+			int mediumIndexJump = query.getResultSize() / 2;
+		
+			items.scroll(mediumIndexJump);  //jump to a specific position
+			
+			int index = 0;
+			while(index < n) {
+				if ( items.next() ) {                //load the next element
+					Film item = (Film) items.get()[0];  //read the object
+					if ( item != null ) {               
+						StringBuilder itemInString = new StringBuilder("Item ")
+							.append("(").append(item.getTytulFilmu()).append(")")
+							.append(" ").append(item.getRokProdukcji());
+						results.add(itemInString.toString());
+						index++;
+					}
+					else {
+						//mismatch between the index and the database: ignore null entries
+					}
+				}
+				else {
+					break;
+				}
+			}
+		}
+		finally {
+			items.close();   //close resources
+		}
+		System.out.println("result is : " + results);
+		return results;
+	}
+	
+	private org.apache.lucene.search.Query buildLuceneQuery(String words, Class<?> searchedEntity) {
+		Analyzer analyzer;
+		if (searchedEntity == null) {    //get the most appropriate analyzer
+			analyzer = new StandardAnalyzer(version);
+		}
+		else {
+			Session s = rentalDao.getCurrentSession();
+			FullTextSession session = org.hibernate.search.Search.getFullTextSession(s);
+			analyzer =session.getSearchFactory().getAnalyzer(searchedEntity);
+		}
+		
+		QueryParser parser = new QueryParser(version, "tytulFilmu", analyzer );
+		org.apache.lucene.search.Query luceneQuery = null;
+		try {
+			luceneQuery = parser.parse(words);
+		}
+		catch (org.apache.lucene.queryParser.ParseException e) {
+			throw new IllegalArgumentException("Unable to parse search entry  into a Lucene query", e);
+		}
+		return luceneQuery;
+	}
+	
+	
+	public String displayIMFeelingLuckyByMatchingTitle(String words) {
+		Session s = rentalDao.getCurrentSession();
+		FullTextSession ftSession = org.hibernate.search.Search.getFullTextSession(s);
+		org.apache.lucene.search.Query luceneQuery = buildLuceneQuery(words, Film.class);
+		
+		FullTextQuery query = ftSession.createFullTextQuery(luceneQuery, Film.class);
+		
+		Film item =  (Film) query
+				.setFirstResult(0).setMaxResults(1)  //use pagination to return one result
+				.uniqueResult();  //return one element
+		
+		StringBuilder itemInString = new StringBuilder("Film ");
+		if (item == null) {
+			itemInString.append("not found");
+		}
+		else {
+			itemInString.append("(").append(item.getTytulFilmu()).append(")")
+			.append(" ").append(item.getRokProdukcji());
+		}
+		System.out.println("feelingLucky : " + itemInString.toString());
+		return itemInString.toString();
+	}
+
+	public List<String> displayAllByMatchingTitleWithPagination
+	(String words, int pageNumber, int window) {
+		Session s = rentalDao.getCurrentSession();
+		FullTextSession ftSession = org.hibernate.search.Search.getFullTextSession(s);
+		
+		org.apache.lucene.search.Query luceneQuery = buildLuceneQuery(words, Film.class);
+		
+		FullTextQuery query = ftSession.createFullTextQuery(luceneQuery, Film.class);
+		
+		int resultSize = query.getResultSize();
+		@SuppressWarnings("unchecked")
+		List<Film> items = query
+				.setFirstResult( (pageNumber - 1) * window )  //set first result from the page
+				.setMaxResults( window )          //set number of results
+				.list();
+		
+		System.out.println("nr of retived results : " + resultSize);
+				
+		List<String> results = new ArrayList<String>();
+		for (Film item : items) {
+			StringBuilder itemInString = new StringBuilder("Item ")
+				.append("(").append(item.getTytulFilmu()).append(")")
+				.append(" ").append(item.getRokProdukcji());
+			results.add( itemInString.toString() );
+		}
+		return results;
+	}
+	
+	
+	public List<String> displayProjectionByMatchingKlient(String words) {
+		Session s = rentalDao.getCurrentSession();
+		FullTextSession ftSession = org.hibernate.search.Search.getFullTextSession(s);
+		
+		
+		org.apache.lucene.search.Query luceneQuery = buildLuceneQuery(words, Klient.class);
+	
+		FullTextQuery query = ftSession.createFullTextQuery(luceneQuery, Klient.class);
+		
+		@SuppressWarnings("unchecked")
+		List<Object[]> results = query
+				.setProjection("login", "imieKlienta") //set the projected properties
+				.list();
+		
+		System.out.println("result count : " + results);
+		
+		List<String> endResults = new ArrayList<String>(results.size());
+		for (Object[] line : results) {
+			endResults.add( line[0].toString() + " "  + line[1].toString());
+		}
+		return endResults;
+	}
+	
+	
+	public List<String> displayProjectionAndMetadataByMatchingTitle(String words) {
+		Session s = rentalDao.getCurrentSession();
+		FullTextSession ftSession = org.hibernate.search.Search.getFullTextSession(s);
+		org.apache.lucene.search.Query luceneQuery = buildLuceneQuery(words, Film.class);
+	
+		FullTextQuery query = ftSession.createFullTextQuery(luceneQuery, Film.class);
+		
+		@SuppressWarnings("unchecked")
+		List<Object[]> results = query
+				.setProjection(
+						"tytulFilmu", 
+						 
+						FullTextQuery.SCORE)  //project the document score
+				.list();
+		
+		List<String> endResults = new ArrayList<String>(results.size());
+		for (Object[] line : results) {
+				Float score = (Float) line[1];
+			String itemView = 
+					(String) line[0] +    
+					score.toString()
+					;  //retrieve the document score
+			endResults.add( itemView );
+		}
+		return endResults;
+	}
+	
+	
 
 }

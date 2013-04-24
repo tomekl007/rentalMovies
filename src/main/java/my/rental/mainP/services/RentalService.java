@@ -43,5 +43,12 @@ public interface RentalService {
 	String checkStemmingIndex();
 	void efficientIndexing();
 	void addFilm(Film f);
+	List<String> displayMediumResultsByMatchingTitle(String words, int n);
+	
+	String displayIMFeelingLuckyByMatchingTitle(String words);
+	List<String> displayAllByMatchingTitleWithPagination
+	(String words, int pageNumber, int window);
+	List<String> displayProjectionByMatchingKlient(String words);
+	List<String> displayProjectionAndMetadataByMatchingTitle(String words) ;
 
 }

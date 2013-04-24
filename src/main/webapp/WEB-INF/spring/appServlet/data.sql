@@ -10,7 +10,8 @@ insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka,linkDoFilmwe
 insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka,linkDoFilmweb) values ('operacja argo', 2013, 'nowosc','http://1.fwcdn.pl/po/41/65/614165/7496968.3.jpg?l=1351310746000','http://www.filmweb.pl/film/Operacja+Argo-2012-614165');
 insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka,idFilmu,linkDoFilmweb) values ('szeregowiec ryan', 2000, 'normalny','/resources/images/ryan.jpg',99,'http://www.filmweb.pl/Szeregowiec.Ryan');
 insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka,idFilmu,linkDoFilmweb) values ('skazani na shawshank', 1984, 'normalny','/resources/images/ryan.jpg',100,'http://www.filmweb.pl/Skazani.Na.Shawshank');
-
+insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka,linkDoFilmweb) values ('batman Dark Knight', 2010, 'hit','http://images.wikia.com/batman/images/b/b0/The-dark-knight-got-milk.jpg','http://www.filmweb.pl/film/Mroczny+Rycerz+powstaje-2012-506756');
+insert into film (tytulFilmu, rokProdukcji,rodzajFilmu,adresOkladka,linkDoFilmweb) values ('batman Rise', 2012, 'nowosc','http://images.wikia.com/batman/images/b/b0/The-dark-knight-got-milk.jpg','http://www.filmweb.pl/film/Mroczny+Rycerz+powstaje-2012-506756');
 
 
 insert into aktor (imieAktora, nazwiskoAktora) values ('christian','Bale');

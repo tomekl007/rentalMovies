@@ -13,6 +13,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -35,11 +36,11 @@ public class Klient implements Serializable {
 		      "Username must be between 3 and 20 characters long.") //<co id="co_enforceSize"/> 
 		  @Pattern(regexp="^[a-zA-Z0-9]+$",
 		        message="Username must be alphanumeric with no spaces")  //<co id="co_noSpaces"/>
-	@Field
+	@Field(store=Store.YES)
 	private String imieKlienta;
 	private String plec;
 	private Date dataWprowadzenia ;
-	@Field
+	@Field(store=Store.YES)
 	private String login;
 	  @Size(min=6, max=20,
 	          message="The password must be at least 6 characters long.") //<co id="co_enforceSize
