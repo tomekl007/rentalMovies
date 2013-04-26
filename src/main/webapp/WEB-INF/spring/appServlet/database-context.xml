@@ -92,6 +92,10 @@ xmlns:mvc="http://www.springframework.org/schema/mvc"
   <!-- <property name="rentalDao" ref="databaseFacade"/>-->
  </bean>
 
+ <!-- <bean id="searchService" class="my.rental.mainP.services.SearchServiceHib">-->
+ <!-- <property name="rentalDao" ref="databaseFacade"/>
+ </bean>-->
+ 
 
  <!-- 
 <tx:advice id="txAdvice"> 

@@ -148,6 +148,7 @@ public class Film implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "rodzajFilmu")
+	@IndexedEmbedded
 	private Cennik rodzajFilmu;
 	@Field(termVector=TermVector.YES)//store occurence statistic 
 	private Integer rokProdukcji;

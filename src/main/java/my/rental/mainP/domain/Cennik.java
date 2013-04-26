@@ -13,6 +13,7 @@ import my.rental.mainP.hibSearchUtils.ParameterizedPaddedRoundedPriceBridge;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.search.annotations.ContainedIn;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.FieldBridge;
@@ -40,6 +41,7 @@ public class Cennik implements Serializable {
 	
 	@OneToMany(mappedBy="rodzajFilmu")
 	@LazyCollection(LazyCollectionOption.FALSE)
+	@ContainedIn
 	List<Film>filmy;
 	
 	public String getRodzajFilmu() {
