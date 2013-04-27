@@ -35,5 +35,6 @@ public interface SearchService {
 		 void testPhraseQuery(String userInput) throws Exception;
 		 void testWildcardQuery(String userInput) throws Exception;
 		 void testPrefixQuery(String userInput) throws Exception ;
-
+		 void testFuzzyQuery(String userInput) throws Exception ;
+		 void testNumericRangeQuery() throws Exception;
 }

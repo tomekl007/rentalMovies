@@ -172,7 +172,9 @@ public class HibernateSearchConroller {
 			//a*
 		//	rentalService.testWildcardQuery(tytulFilmu);
 			//ar
-			searchService.testPrefixQuery(tytulFilmu);
+		//	searchService.testPrefixQuery(tytulFilmu);
+			searchService.testFuzzyQuery(tytulFilmu);
+			searchService.testNumericRangeQuery();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

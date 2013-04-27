@@ -25,6 +25,8 @@ import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.Explanation;
+import org.apache.lucene.search.FuzzyQuery;
+import org.apache.lucene.search.NumericRangeQuery;
 import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.PrefixQuery;
 import org.apache.lucene.search.Query;
@@ -749,7 +751,96 @@ public class SearchServiceHib implements SearchService {
 				}
 
 			}
+			
+			public void testFuzzyQuery(String userInput) throws Exception {
+				Session s = rentalDao.getCurrentSession();
+				FullTextSession session = org.hibernate.search.Search.getFullTextSession(s);
 
 
+				
+				FuzzyQuery query =
+					new FuzzyQuery( new Term( "tytulFilmu", userInput ), 0.4F );
+				System.out.println( query.toString() );
+
+				org.hibernate.search.FullTextQuery hibQuery = 
+						session.createFullTextQuery( query, Film.class );
+				List<Film> results = hibQuery.list();
+
+
+				for (Film dvd : results) {
+					System.out.println( dvd.getTytulFilmu() );
+				}
+
+				
+			}
+			
+			public void testNumericRangeQuery() throws Exception {
+				Session s = rentalDao.getCurrentSession();
+				FullTextSession session = org.hibernate.search.Search.getFullTextSession(s);
+
+
+					//Term lower = new Term( "rokProdukcji", "2000" );
+					//Term upper = new Term( "rokProdukcji", "2002" );
+					 NumericRangeQuery<Integer> query = NumericRangeQuery.newIntRange("rokProdukcji",
+                             2000, 2010,
+                             true, true);
+					
+					//RangeQuery query = new RangeQuery( lower, upper, true );
+					System.out.println( query.toString() );
+
+					org.hibernate.search.FullTextQuery hibQuery = session.createFullTextQuery( query, Film.class );
+					List<Film> results = hibQuery.list();
+
+					for(Film f : results){
+					System.out.println(f.getTytulFilmu() + " " + f.getRokProdukcji());
+					
+					}
+					
+					
+			}
+			
+			/*public void testBooleanQuery1() throws Exception {
+				Session s = rentalDao.getCurrentSession();
+				FullTextSession session = org.hibernate.search.Search.getFullTextSession(s);
+
+
+					String required = "Ba";
+					String optional = "story";
+					String omitted = "complete";
+
+					Term requiredTerm = new Term( "title", required );
+					Term optionalTerm = new Term( "title", optional );
+					Term omittedTerm = new Term( "title", omitted );
+
+					tx = session.beginTransaction();
+
+					BooleanClause requiredClause =
+						new BooleanClause( new TermQuery( requiredTerm ), BooleanClause.Occur.MUST );
+
+					BooleanQuery query = new BooleanQuery();
+					query.add( requiredClause );
+					query.add( new TermQuery( optionalTerm ), BooleanClause.Occur.SHOULD );
+					query.add( new TermQuery( omittedTerm ), BooleanClause.Occur.MUST_NOT );
+					System.out.println( query.toString() );
+
+					org.hibernate.search.FullTextQuery hibQuery = session.createFullTextQuery( query, Dvd.class );
+					List<Dvd> results = hibQuery.list();
+
+					assert results.size() == 2 : "incorrect hit count";
+					assert results.get( 0 ).getTitle().equals( "The Office - Season One" );
+
+					for (Dvd dvd : results) {
+						System.out.println( dvd.getTitle() );
+					}
+
+					for (Object element : session.createQuery( "from " + Dvd.class.getName() ).list()) session.delete( element );
+					tx.commit();
+				}
+				finally {
+					session.close();
+				}
+			}
+
+*/
 
 }
