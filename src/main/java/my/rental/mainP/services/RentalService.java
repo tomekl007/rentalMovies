@@ -43,4 +43,6 @@ public interface RentalService {
 	
 	void addFilm(Film f);
 
+	List<Wypozyczenie> getAllWypozyczenia();
+
 }

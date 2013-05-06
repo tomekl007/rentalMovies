@@ -297,4 +297,12 @@ public class HibernateRentalDaoImp implements RentalDao {
 		
 	}
 
+
+
+	@Override
+	public List<Wypozyczenie> getAllWypozyczenias() {
+		return template.loadAll(Wypozyczenie.class);
+		
+	}
+
 }

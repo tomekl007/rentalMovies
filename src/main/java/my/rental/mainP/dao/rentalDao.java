@@ -79,4 +79,6 @@ public interface RentalDao {
 
 	void saveFilm(Film f);
 
+	public List<Wypozyczenie> getAllWypozyczenias();
+
 }

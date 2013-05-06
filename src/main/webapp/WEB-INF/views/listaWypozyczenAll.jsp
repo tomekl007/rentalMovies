@@ -49,4 +49,12 @@
    
    </c:forEach>
   </table>
+  
+  <s:url value="/gcharts/stats" 
+                  var="stats_url" />  
+                  <input type="button" value="pokaz statystyki" name="pokaz statystyki"
+      onClick="location.href='${stats_url}'"/>
+         
+       
+  
 </div>

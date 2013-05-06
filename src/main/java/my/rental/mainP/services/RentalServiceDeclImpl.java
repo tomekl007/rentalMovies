@@ -208,8 +208,10 @@ public class RentalServiceDeclImpl implements RentalService {
 	}
 
 
-
-			
+	@Override
+	public List<Wypozyczenie> getAllWypozyczenia(){
+		return rentalDao.getAllWypozyczenias();
+	}
 
 		
 
